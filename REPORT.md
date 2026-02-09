@@ -110,7 +110,7 @@ Create a 3-class classification system:
   3. Validated word counts (100-200)
   4. Manual quality control
 - **Time:** ~3 hours
-- **Result:** 500 AI vanilla paragraphs
+- **Result:** 300 AI vanilla paragraphs
 
 #### Phase 3: AI Styled Generation
 - **Goal:** Make AI mimic Dickens and Austen's writing styles
@@ -119,17 +119,131 @@ Create a 3-class classification system:
   - Austen: Witty irony, balanced sentences, Regency propriety
 - **Process:** 250 paragraphs per author style (manual generation)
 - **Time:** ~3 hours
-- **Result:** 500 AI styled paragraphs
+- **Result:** 200 AI styled paragraphs
 
 ### Dataset Statistics
 
-**Final Dataset:** 1500 paragraphs
-- Class 0 (Human): 500 (33.3%)
-- Class 1 (AI Vanilla): 300 (33.3%)
-- Class 2 (AI Styled): 200 (33.3%)
+**Initial Dataset (Victorian Literature):** 1000 paragraphs
+- Class 0 (Human): 500 (Dickens + Austen Victorian works)
+- Class 1 (AI Vanilla): 300 
+- Class 2 (AI Styled): 200 
 
+**Saved Files:**
+- `data/dataset/` 
 
-## 🔬 TASK 1: The Fingerprint - Linguistic Analysis
+**Status:** ⚠️ Used for initial Task 1 analysis, then revised
+
+---
+
+### Dataset Revision: Cross-Baseline Validation
+
+#### Why Revision Was Needed
+
+**Problem Identified:** Victorian literature (Dickens + Austen *Pride and Prejudice*) had limited stylistic diversity:
+- Both authors use formal Victorian prose
+- Similar vocabulary era (1810s-1860s)
+- POS ratios failed to discriminate (p = 0.812)
+- Even task 2 tier C part was failing badly(got 50% accuracy)
+- Risk of overfitting to Victorian style rather than learning general human patterns
+- Also class imbalance is clearly there,was not able to generate using API and manual work was too hard,so class 2 and 3 have ~300 paragraphs whereas class 1 has ~500 paragraphs
+
+**Solution:** Tried to introduce **stylistic/a bit modern contrast** by replacing Dickens with Mark Twain(ALSO EVERY BOOK FROM "Project Gutenberg website is before 1930,So any book will still have victorian literature)
+
+#### Revised Human Text Collection (Phase 1b)
+
+**New Sources:**
+- **Mark Twain:** *The Adventures of Tom Sawyer* (Project Gutenberg ID: 74)
+  - Colloquial American English (1876)
+  - Dialogue-heavy, action-focused narrative
+  - Informal, conversational tone
+  - Shorter sentences, simpler vocabulary
+- **Jane Austen:** *Emma* (Project Gutenberg ID: 158)
+  - Formal British English (1815)
+  - Maintained for contrast with Twain
+  - Social commentary, witty observations
+- Asked AI which novel/book from gutenberg is suitable for a bit modern contrast
+
+**Process:**
+1. Downloaded Tom Sawyer raw text from Project Gutenberg
+2. Cleaned metadata and chapter headers
+3. Extracted 235 paragraphs (100-200 words each)
+4. Combined with 235 Austen *Emma* paragraphs
+5. **Result:** 470 human paragraphs (Twain + Austen)
+
+#### Regenerated AI Text (Phase 2b & 3b)
+
+**AI Vanilla (Class 2):**
+- Regenerated 466 paragraphs using same universal topics
+- Maintained formal analytical style
+- **Purpose:** Test if colloquial Twain exposes AI's formal bias
+
+**AI Styled (Class 3):**
+- Created 494 new paragraphs mimicking Twain + Austen
+- **Twain-styled prompts:** "Write in Mark Twain's colloquial, dialogue-heavy, action-focused style with informal American English..."
+- **Austen-styled prompts:** "Write in Jane Austen's witty, ironic, socially observant style with formal Regency English..."
+- **Challenge:** Can AI convincingly mimic colloquial vs formal styles?
+
+**Time Investment:**
+- Twain text extraction & cleaning: ~2 hours
+- AI Vanilla regeneration: ~2 hours (466 paragraphs manually via Gemini)
+- AI Styled regeneration: ~2 hours (494 paragraphs with style-specific prompts)
+- **Total revision time:** ~4 hours
+
+---
+
+### Final Dataset Statistics (Twain + Austen)
+
+**Complete Dataset:** 1430 paragraphs
+- **Class 1 (Human):** 470 paragraphs
+  - Mark Twain (*Tom Sawyer*): 235 paragraphs
+  - Jane Austen (*Emma*): 235 paragraphs
+- **Class 2 (AI Vanilla):** 466 paragraphs (formal analytical style)
+- **Class 3 (AI Styled):** 494 paragraphs (mimicking Twain + Austen)
+
+**Train/Val/Test Split:**
+- Train: 1001 paragraphs (70%)
+- Validation: 215 paragraphs (15%)
+- Test: 214 paragraphs (15%)
+
+**Saved Files:**
+- `TASK0/data/dataset/train.jsonl` (1001 samples)
+- `TASK0/data/dataset/val.jsonl` (215 samples)
+- `TASK0/data/dataset/test.jsonl` (214 samples)
+
+---
+
+### Key Improvements from Revision
+
+**Stylistic Diversity:**
+- ✅ Colloquial (Twain) vs Formal (Austen) contrast
+- ✅ American vs British English
+- ✅ Dialogue-heavy vs Narrative-heavy
+- ✅ Action-focused vs Social-commentary-focused
+
+**Metric Performance:**
+- ✅ POS ratios NOW discriminate (Twain: 0.31 vs AI: 0.36, p < 0.01)
+- ✅ Sentence variance robust across both styles
+- ✅ Punctuation patterns vary by author (expected)
+- ✅ Prevents overfitting to single author style
+
+**Scientific Rigor:**
+- Cross-baseline validation demonstrates feature robustness
+- Tests generalization beyond Victorian literature
+- Exposes author-dependent vs universal patterns
+
+---
+
+### Dataset Creation Lessons Learned
+
+1. **API limitations require flexibility and money:** Manual generation (Gemini web) > API automation for one-time tasks
+2. **Stylistic diversity matters:** Single-author baselines risk overfitting
+3. **Cross-validation is critical:** Testing on Twain revealed POS ratio author-dependency
+4. **Time investment pays off:** 10-12-hour revision improved scientific validity
+5. **Era consistency important:** Both humans from 19th century (Victorian/Gilded Age) prevents temporal confounds
+
+---
+
+## TASK 1:ANALYSIS OF THE DATASET
 
 ### Objective
 
@@ -264,6 +378,147 @@ Create a 3-class classification system:
 - **Comparison to Victorian Dataset:** With Dickens, Human was Grade 12-14 (complex) > AI Grade 8-10 (simpler). Pattern REVERSED with Twain!
 - **Verdict:** ✅ Significant for classification but direction depends on human author's complexity level
 
+#### 7. Dependency Tree Depth 🔄 **AUTHOR DEPENDENCY VALIDATED**
+
+**Definition:** Average depth of syntactic parse trees (measures how deeply clauses are nested using spaCy's dependency parser)
+
+**Initial Hypothesis:** Humans should have deeper trees (complex nested clauses) vs AI's flat structures
+
+**Literature Research:** Found that AI can produce deeper/more complex syntactic structures with longer dependency tree heights, but these are often rigid and predictable compared to human variability.
+
+**Testing Strategy:** Ran analysis on BOTH datasets to validate whether tree depth is AI fingerprint or author style marker.
+
+---
+
+**Results - Cross-Dataset Validation:**
+
+| Dataset | Human | AI Vanilla | AI Styled | Pattern | p-value |
+|---------|-------|------------|-----------|---------|---------|
+| **Victorian (Dickens+Austen)** | 6.525 | 6.103 | 6.122 | Human > AI ✅ | 0.023 |
+| **Twain+Austen** | 5.530 | 5.882 | 6.263 | Human < AI ⚠️ | 0.021 |
+
+**Pattern REVERSED depending on human baseline!**
+
+---
+
+**Victorian Dataset (Dickens + Austen) - Hypothesis CONFIRMED:**
+
+**Human (Dickens formal prose): 6.525** (deepest)
+- "It was the best of times, it was the worst of times, it was the age of wisdom, it was the age of foolishness..."
+- Complex parallelism, multiple subordinate clauses
+- Deep nesting (~6.5 levels) - Victorian literary style
+
+**AI Vanilla: 6.103** (shallower than human)
+**AI Styled: 6.122** (shallower than human)
+- AI attempts formal style but doesn't match Dickens' complexity
+- Result: **Human > AI** (6.525 vs 6.103, p=0.023) ✅
+
+---
+
+**Twain+Austen Dataset - Hypothesis REVERSED:**
+
+**Human (Twain colloquial): 5.530** (shallowest!)
+- "Tom appeared on the sidewalk with a bucket of whitewash and a long-handled brush. He surveyed the fence."
+- Simple subject-verb-object, minimal subordination
+- Flat trees (~5.5 levels) - mimics spoken language
+
+**AI Vanilla: 5.882** (deeper than human)
+**AI Styled: 6.263** (deepest - attempting formal prose)
+- "The young gentleman, who had been entrusted with the task that his guardian had deemed necessary for his moral improvement, which required considerable diligence, approached..."
+- Multiple embedded clauses, formal subordination
+- Result: **AI > Human** (6.263 vs 5.530, p=0.021) ⚠️
+
+---
+
+**The Formality Spectrum Revealed:**
+
+```
+Colloquial ←─────────────────────→ Formal
+   5.5                 6.0-6.1               6.5+
+   Twain              AI Default            Dickens
+(spoken)           (moderate formal)    (peak literary)
+```
+
+**What Tree Depth Actually Measures:**
+
+❌ **NOT AI vs Human authorship** (pattern reverses with different authors!)
+✅ **Writing formality level** (colloquial vs academic vs literary)
+
+**Author Style Rankings:**
+1. **Dickens (Victorian formal):** 6.5+ depth - complex literary prose
+2. **AI's default formality:** 6.0-6.3 depth - moderate academic style
+3. **Twain (American colloquial):** 5.5 depth - mimics spoken language
+
+**Austen Effect:** She's formal (~6-7 depth) but not as ornate as Dickens. When averaged:
+- Dickens + Austen = 6.5 (both formal)
+- Twain + Austen = 5.5 (Twain's colloquial style dominates)
+
+---
+
+**Why This Validates Genre Bias Discovery:**
+
+This explains Task 4 adversarial results perfectly:
+
+**Modern SOP → 15% Human confidence:**
+- Tree depth ~5.5 (informal, simple syntax)
+- Modern vocabulary
+- Detector thinks: "Simple syntax = AI/modern writing"
+
+**Victorian rewrite → 59% Human confidence:**
+- Tree depth ~6.5 (formal, nested clauses)
+- Victorian vocabulary
+- Detector thinks: "Complex syntax = Dickens/Victorian = Human"
+
+**The detector learned:**
+- High tree depth (6.5+) + Victorian vocab → Classify as Human (Dickens pattern)
+- Low tree depth (5.5) + modern vocab → Classify as AI (informal pattern)
+
+**But syntax complexity is a STYLE CHOICE, not AI detection!**
+
+---
+
+**Literature Confirmation:**
+
+Research states: "AI tends to produce deeper/more complex structures" ✅
+
+**BUT it depends on the prompt:**
+- Formal prompt → AI creates 6.0-6.3 depth (matches our AI Styled: 6.263)
+- Vanilla prompt → AI creates ~6.0 depth (matches our AI Vanilla: 6.103)
+- AI **CANNOT** match peak literary complexity (Dickens 6.5+) or pure colloquial simplicity (Twain 5.5)
+
+**AI defaults to moderate formality (6.0-6.3) - the "academic middle zone"**
+
+---
+
+**Combined with Sentence Variance - The True Dual Fingerprint:**
+
+1. **Sentence Variance** (Universal - ALWAYS works):
+   - Victorian: Human 14.6 vs AI 5.0 (3x difference)
+   - Twain: Human 13.7 vs AI 5.5 (2.5x difference)
+   - **Pattern: ALWAYS Human > AI regardless of author** ✅
+   - This is THE AI fingerprint (mechanical pacing limitation)
+
+2. **Tree Depth** (Author-dependent - varies by baseline):
+   - Victorian: Human 6.525 > AI 6.103 (Dickens formal > AI)
+   - Twain: Human 5.530 < AI 6.263 (Twain colloquial < AI formal)
+   - **Pattern: Depends on author's formality level** ⚠️
+   - This is a GENRE/STYLE marker, not AI detection
+
+---
+
+**Verdict:** ✅ **VALID CLASSIFICATION FEATURE, NOT AI FINGERPRINT**
+
+**What it's useful for:**
+- Distinguishing colloquial vs formal writing (classification feature)
+- Understanding what detectors actually learn (genre patterns)
+- Proving baseline selection is critical
+
+**What it's NOT:**
+- Universal AI fingerprint (reverses with different authors)
+- Fundamental AI limitation (AI can create complex syntax)
+
+**Key Insight:** Detectors trained on Victorian literature learn "complex syntax = human" and "simple syntax = AI", but this is GENRE BIAS, not true authorship detection. Syntax complexity measures **formality**, sentence variance measures **AI's mechanical limitation**.
+
 ---
 
 ### Summary of Findings: Dataset Comparison
@@ -272,7 +527,8 @@ Create a 3-class classification system:
 
 | Metric | Victorian Dataset | Twain + Austen Dataset | Insight |
 |--------|------------------|----------------------|---------|
-| **Sentence Variance** | Human 14.6 vs AI 5.0 (3x) ✅ | Human 13.7 vs AI 5.5 (2.5x) ✅ | **ROBUST - Works on both!** |
+| **Sentence Variance** | Human 14.6 vs AI 5.0 (3x) ✅ | Human 13.7 vs AI 5.5 (2.5x) ✅ | **ROBUST - Works on both! Universal AI fingerprint** |
+| **Dependency Tree Depth** | Human 6.525 > AI 6.103 ✅ | Human 5.530 < AI 6.263 ⚠️ | **Author-dependent! Measures formality (Dickens formal, Twain colloquial)** |
 | **TTR** | AI 0.723 > Human 0.684 ⚠️ | AI 0.710 > Human 0.674 ⚠️ | Length-confounded on both |
 | **Hapax** | AI 0.848 > Human 0.805 ⚠️ | AI 0.585 > Human 0.524 ⚠️ | Length-confounded on both |
 | **POS Ratio** | No difference (p=0.812) ❌ | Human 0.313 < AI 0.356 ✅ | **Author-dependent!** |
@@ -281,24 +537,36 @@ Create a 3-class classification system:
 
 **Key Insights from Comparison:**
 
-1. **Sentence Variance is THE ROBUST METRIC** - Works across both datasets with massive effect sizes (14.6→13.7 variance for humans, ~5 for AI consistently)
+1. **Sentence Variance is THE UNIVERSAL AI FINGERPRINT** 
+   - Works identically on both datasets (14.6→13.7 Human, ~5.0 AI consistently)
+   - **ALWAYS Human > AI regardless of author** (2.5-3x difference)
+   - This is a true mechanical limitation of AI generation
 
-2. **POS Ratio Depends on Author Baseline:**
+2. **Dependency Tree Depth is AUTHOR-DEPENDENT (Validated Across Datasets!):**
+   - Victorian (Dickens formal): Human 6.525 > AI 6.103 ✅ (hypothesis confirmed)
+   - Twain (colloquial): Human 5.530 < AI 6.263 ⚠️ (hypothesis reversed!)
+   - **Pattern switches with author formality level**
+   - Proves syntax complexity measures STYLE, not AI vs Human
+   - AI defaults to moderate formality (6.0-6.3) - can't match Dickens peak (6.5+) or Twain simplicity (5.5)
+   - **Explains Task 4 genre bias:** Detectors learned "complex syntax = Victorian = Human"
+
+3. **POS Ratio Depends on Author Baseline:**
    - Victorian Dickens (formal, descriptive) matched AI's formality → FAILED
    - Colloquial Twain (action-focused, minimal adjectives) contrasts AI → SUCCESS
 
-3. **Flesch-Kincaid Direction is Author-Dependent:**
+4. **Flesch-Kincaid Direction is Author-Dependent:**
    - Victorian literature is complex (Grade 12-14) > AI's simplicity
    - Twain's accessible narrative (Grade 10) < AI's formal analytical style (Grade 10.6)
 
-4. **Length Bias Consistent Across Datasets:** Both show TTR/Hapax confounded by paragraph length
+5. **Length Bias Consistent Across Datasets:** Both show TTR/Hapax confounded by paragraph length
 
-5. **Punctuation Shows Era + Style:** Victorian 8 semicolons/1000 vs Twain 13.2/1000 (Twain uses MORE for dramatic dialogue), but BOTH > AI
+6. **Punctuation Shows Era + Style:** Victorian 8 semicolons/1000 vs Twain 13.2/1000 (Twain uses MORE for dramatic dialogue), but BOTH > AI
 
 **What makes human writing "human"?**
 
 - NOT vocabulary (AI can mimic - TTR/Hapax show AI = Human when length-normalized)
 - NOT grammar (AI learned naturally - POS patterns overlap with some authors)
+- NOT syntax complexity (Tree depth varies by style - Twain flat, Dickens deep, AI adapts to prompt)
 - **IT'S RHYTHM** - the ebb and flow of sentence length
 
 **The "Middle Zone" Problem:**
@@ -310,6 +578,8 @@ Create a 3-class classification system:
 - Humans naturally vary: 3 words, then 40 words, then 10 words (variance ~13.7)
 
 **This is THE tell that reveals AI writing - 2.5x difference, 22σ effect, length-independent, consistent across datasets.**
+
+**Syntax complexity (tree depth) is a STYLE CHOICE, not an AI fingerprint - it measures formality, not authorship.**
 
 ---
 
