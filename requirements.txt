@@ -1,0 +1,98 @@
+# ============================================
+# PRECOG NLP Task - AI Authorship Detection
+# Requirements with exact versions used in project
+# Last updated: February 9, 2026
+# ============================================
+
+# Core Data Science
+numpy==1.24.3
+pandas==2.0.3
+scipy==1.11.2
+
+# Machine Learning - Traditional
+scikit-learn==1.3.2
+xgboost==2.0.0
+
+# Deep Learning - PyTorch
+torch==2.1.0
+torchvision==0.16.0
+torchaudio==2.1.0
+
+# Transformers & NLP
+transformers==4.35.0
+tokenizers==0.15.0
+huggingface-hub==0.19.4
+safetensors==0.4.1
+
+# Parameter-Efficient Fine-Tuning (LoRA)
+peft==0.6.0
+
+# Word Embeddings
+gensim==4.3.2
+
+# NLP Processing
+spacy==3.7.2
+nltk==3.8.1
+textstat==0.7.3
+
+# Explainability (SHAP)
+shap==0.43.0
+
+# Visualization
+matplotlib==3.8.0
+seaborn==0.13.0
+plotly==5.18.0
+
+# Jupyter & Interactive
+jupyter==1.0.0
+notebook==7.0.6
+ipykernel==6.26.0
+ipywidgets==8.1.1
+
+# Utilities
+tqdm==4.66.1
+requests==2.31.0
+python-dotenv==1.0.0
+colorama==0.4.6
+
+# Google AI (Gemini)
+google-generativeai==0.3.1
+
+# File I/O
+jsonlines==4.0.0
+
+# Web Scraping (Project Gutenberg)
+beautifulsoup4==4.12.2
+
+# ============================================
+# Installation Instructions:
+# ============================================
+# 1. Create virtual environment (recommended):
+#    python -m venv venv
+#    source venv/bin/activate  # Linux/Mac
+#    # OR
+#    venv\Scripts\activate  # Windows
+#
+# 2. Install all requirements:
+#    pip install -r requirements.txt
+#
+# 3. Download spaCy English model:
+#    python -m spacy download en_core_web_sm
+#
+# 4. Download NLTK data (optional, if not auto-downloaded):
+#    python -c "import nltk; nltk.download('punkt'); nltk.download('averaged_perceptron_tagger')"
+#
+# ============================================
+# Hardware Requirements:
+# ============================================
+# - CPU: Any modern processor (tested: Dell XPS 9530)
+# - RAM: 8GB minimum (16GB recommended for DistilBERT)
+# - GPU: Optional (CUDA for faster training)
+# - Storage: ~2GB for models + datasets
+#
+# ============================================
+# Compatibility:
+# ============================================
+# - Python: 3.9, 3.10, 3.11 (tested on 3.10)
+# - OS: Linux, macOS, Windows
+# - Tested: Ubuntu 22.04, macOS, Windows 11

@@ -1,0 +1,77 @@
+Paragraph,Predicted_Class,Confidence,AI_Styled_Prob,AI_Vanilla_Prob,Human_Prob,Text_Preview
+Para_1,Human,0.90912855,0.070084475,0.020787003,0.90912855,"In all these situations you must pay attention, and you will perform less well, or not at all,
+if yo..."
+Para_2,Human,0.9841601,0.015213452,0.0006263293,0.9841601,"It is the mark of effortful activities that they interfere with each
+other, which is why it is diffi..."
+Para_3,AI_Styled,0.89252865,0.89252865,0.0030092131,0.104462065,"Intense focusing on a task can make people effectively blind, even to stimuli that
+normally attract ..."
+Para_4,AI_Vanilla,0.49870422,0.43014672,0.49870422,0.07114911,"Seeing and orienting are automatic functions of System 1, but they depend on the
+allocation of some ..."
+Para_5,AI_Styled,0.71325624,0.71325624,0.2596817,0.027062057,"The interaction of the two systems is a recurrent theme of the book, and a brief synopsis of
+the plo..."
+Para_6,AI_Vanilla,0.9685071,0.027494587,0.9685071,0.0039982973,"When System 1 runs into difficulty, it calls on System 2 to support more detailed and
+specific proce..."
+Para_7,Human,0.6004012,0.16398397,0.23561476,0.6004012,"Surprise then activates and orients your attention: you
+will stare, and you will search your memory ..."
+Para_8,Human,0.8303554,0.13760078,0.032043893,0.8303554,"The division of labor between System 1 and System 2 is highly efficient: it minimizes
+effort and opt..."
+Para_9,Human,0.8393595,0.14378664,0.016853778,0.8393595,"These tasks engage System 2, because saying “upper/lower” or “right/left” is not what
+you routinely ..."
+Para_10,AI_Vanilla,0.48786265,0.33907977,0.48786265,0.17305757,"Conflict between an automatic reaction and an intention to conWhetion to ctrol it is
+common in our l..."
+Para_11,AI_Styled,0.51614565,0.51614565,0.24241208,0.24144234,"Now that you have measured the lines, you—your System 2, the conscious being you
+call “I”—have a new..."
+Para_12,Human,0.9957411,0.004099228,0.00015963499,0.9957411,"Not all illusions are visual. There are illusions of thought, which we call cognitive
+illusions. As ..."
+Para_13,Human,0.88522077,0.10041731,0.014361907,0.88522077,"Many years later I learned that the teacher had warned us against psychopathic charm,
+and the leadin..."
+Para_14,AI_Vanilla,0.36314327,0.32970357,0.36314327,0.3071531,"The question that is most often asked about cognitive illusions is whether they can be
+overcome. The..."
+Para_15,Human,0.720117,0.27877092,0.0011121009,0.720117,"If you would like to know what your body is doing while your mind is hard at work,
+set up two piles ..."
+Para_16,Human,0.6227445,0.25261745,0.12463812,0.6227445,"One of Hess’s findings especially captured my attention. He had noticed that the
+pupils are sensitiv..."
+Para_17,AI_Vanilla,0.9744913,0.023267824,0.9744913,0.0022408485,"Beatty and I focused on paced tasks, such as Add-1, in which we knew precisely what
+was on the subje..."
+Para_18,Human,0.65433794,0.30389038,0.041771684,0.65433794,"Add-1 with four digits caused a larger dilation than the task of holding seven digits for
+immediate ..."
+Para_19,Human,0.6556225,0.34087265,0.0035049429,0.6556225,"We worked for some months in a spacious basement suite in which we had set up a
+closed-circuit syste..."
+Para_20,Human,0.9983912,0.0015997704,9.000253e-06,0.9983912,"The casual observations we made from the corridor were sometimes as informative as
+the formal experi..."
+Para_21,AI_Vanilla,0.569507,0.31678775,0.569507,0.11370528,"We found that people, when engaged in a mental sprint, may become effectively
+blind. The authors of ..."
+Para_22,AI_Vanilla,0.9491307,0.041066095,0.9491307,0.009803148,"Much like the electricity meter outside your house or apartment, the pupils offer an
+index of the cu..."
+Para_23,AI_Vanilla,0.7839961,0.1291985,0.7839961,0.08680532,"System 2 and the electrical circuits in your home both have limited capacity, but they
+respond diffe..."
+Para_24,AI_Vanilla,0.82536,0.082766585,0.82536,0.091873415,"Beatty and I worked together for only a year, but our collaboration had a large effect
+on our subseq..."
+Para_25,AI_Vanilla,0.96337146,0.030480629,0.96337146,0.0061479323,"The tasks that we studied varied considerably in their effects on the pupil. At baseline,
+our subjec..."
+Para_26,AI_Vanilla,0.72867626,0.17048275,0.72867626,0.100840956,"What makes some cognitive operations more demanding and effortful than others?
+What outcomes must we..."
+Para_27,AI_Vanilla,0.92961913,0.0605396,0.92961913,0.0098413,"A crucial capability of System 2 is the adoption of “task sets”: it can program memory
+to obey an in..."
+Para_28,AI_Vanilla,0.8616782,0.10338533,0.8616782,0.034936514,"Now suppose that at the end of the page you get another instruction: count all the
+commas in the nex..."
+Para_29,AI_Vanilla,0.8689301,0.07720557,0.8689301,0.053864256,"Time pressure is another driver of effort. As you carried out the Add-3 exercise, the
+rush was impos..."
+Para_30,Human,0.9173192,0.07980228,0.002878454,0.9173192,"I spend a few months each year in Berkeley, and one of my great pleasures there is a daily
+four-mile..."
+Para_31,Human,0.95914036,0.03509912,0.0057605417,0.95914036,"System 2 also has a natural speed. You expend some mental energy in random
+thoughts and in monitorin..."
+Para_32,Human,0.9669105,0.029358502,0.003731019,0.9669105,"It is normally easy and actually quite pleasant to walk and think at the same time, but
+at the extre..."
+Para_33,AI_Vanilla,0.96347547,0.034792855,0.96347547,0.0017316568,"Accelerating beyond my strolling speed completely changes the experience of
+walking, because the tra..."
+Para_34,AI_Vanilla,0.9432814,0.046542916,0.9432814,0.010175671,"Fortunately, cognitive work is not always aversive, and people sometimes expend
+considerable effort ..."
+Para_35,AI_Styled,0.8900356,0.8900356,0.07341186,0.036552463,"It is now a well-established proposition that both self-control and cognitive effort are
+forms of me..."
+Para_36,AI_Vanilla,0.9168089,0.080359735,0.9168089,0.002831371,"People who are cognitively busy are also more likely to make selfish choices, use
+sexist language, a..."
+Para_37,AI_Vanilla,0.9893462,0.009190183,0.9893462,0.0014635861,"A series of surprising experiments by the psychologist Roy Baumeister and his
+colleagues has shown c..."
+Para_38,AI_Vanilla,0.9956254,0.0043021715,0.9956254,7.2454626e-05,"Baumeister’s group has repeatedly found that an effort of will or self-control is tiring;
+if you hav..."
