@@ -128,7 +128,7 @@ import json
 import pandas as pd
 
 # Load dataset
-with open('data/dataset/train.jsonl', 'r') as f:
+with open('TASK0/data/dataset/train.jsonl', 'r') as f:
     data = [json.loads(line) for line in f]
 
 df = pd.DataFrame(data)
