@@ -5,7 +5,7 @@
 **Author:** S.Yogansh
 ---
 
-## 🎯 Project Overview
+##  Project Overview
 
 This project detects AI-generated text through **linguistic fingerprinting** - proving that structural and stylistic features alone can distinguish human from AI writing, regardless of topic.
 
@@ -13,7 +13,7 @@ This project detects AI-generated text through **linguistic fingerprinting** - p
 
 ---
 
-## 📊 Dataset
+##  Dataset
 
 **Approx 1500 paragraphs across 3 balanced classes:**
 - **Class 0 (Human):** 500 paragraphs from Victorian literature (Twain, Austen)
@@ -27,7 +27,7 @@ This project detects AI-generated text through **linguistic fingerprinting** - p
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 precog/
@@ -87,7 +87,7 @@ precog/
 
 ---
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### 1. Clone Repository
 ```bash
@@ -142,7 +142,7 @@ print(df.groupby('class')['sentence_variance'].mean())
 
 ### Task 1: The Fingerprint Discovery
 
-**⭐ The Smoking Gun: Sentence Length Variance**
+** The Smoking Gun: Sentence Length Variance**
 - **Human:** 13.7 variance (wild rhythm: 3-word → 60-word sentences)
 - **AI:** 5.5 variance (monotonous 15-25 word "middle zone")
 - **Effect size:** 22σ (p < 0.0000000001) - STRONGEST signal
@@ -214,7 +214,7 @@ print(df.groupby('class')['sentence_variance'].mean())
 | Gen 0 | Baseline AI | 12.94% | - |
 | Gen 1-3 | Victorian vocab | 40.77% | +27.83 pts |
 | Breakthrough | + Sentence variance | 51.34% | +10.57 pts |
-| Peak | + Extreme chaos | **59.76%** ⭐ | +8.42 pts |
+| Peak | + Extreme chaos | **59.76%**  | +8.42 pts |
 | Over-optimization | Too extreme | 57.12% | -2.64 pts  |
 
 **Key Discoveries:**
@@ -245,13 +245,13 @@ Tested detector on author's own modern writing (Statement of Purpose):
 4. Adversarial attacks plateau at 60% (detector robustness)
 5. Over-optimization is detectable (chaos paradox)
 
-**⚠️ Critical Limitations:**
+** Critical Limitations:**
 1. **Genre bias:** Detector learned Victorian narrative ≠ modern human writing
 2. **Era dependency:** Can't recognize 2020s human text (15% Human score)
 3. **Not production-ready:** 97% accuracy is era discrimination, not authorship detection
 4. **Training data matters:** 170-year gap created fundamental flaw
 
-**🎓 Key Lesson:**
+** Key Lesson:**
 > "This project demonstrates strong NLP techniques and rigorous analysis, but the genre bias discovery shows that **training data selection** is critical for generalization. High test accuracy (97%) doesn't guarantee real-world applicability if training distribution doesn't match deployment scenarios."
 
 ---

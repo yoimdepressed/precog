@@ -3,7 +3,7 @@
 
 **Author:** S.Yogansh  
 **Date:** February 3-8, 2026  
-**Status:** Task 0 ✅ | Task 1 ✅ | Task 2 Tier A ✅ | Task 2 Tier B ✅ | Task 2 Tier C ✅ | Task 4 ✅
+**Status:** Task 0  | Task 1  | Task 2 Tier A  | Task 2 Tier B  | Task 2 Tier C  | Task 4 
 
 ---
 
@@ -81,8 +81,8 @@ This project tackles the challenge of detecting AI-generated text through lingui
    - **Key insight:** Must target ALL top features simultaneously; reaching 90% would require text so chaotic it loses readability
 
 11. **Critical Limitation Discovered - Genre Bias:** Personal writing test revealed detector learned era/genre patterns, not authorship
-   - **Author's modern academic SOP:** 14.95% Human (misclassified as AI) ❌
-   - **Same content as Victorian narrative:** 58.52% Human (+43.57 points) ✅
+   - **Author's modern academic SOP:** 14.95% Human (misclassified as AI) 
+   - **Same content as Victorian narrative:** 58.52% Human (+43.57 points) 
    - **Root cause:** Training data era gap (1810-1850s fiction vs 2024 AI prose)
    - **Implication:** Detector CANNOT recognize modern human writing—detects Victorian narrative style, not human authorship
    - **Impact:** 97% accuracy is genre discrimination, not true AI detection; invalidates real-world deployment for contemporary text
@@ -90,7 +90,7 @@ This project tackles the challenge of detecting AI-generated text through lingui
 
 ---
 
-## 🎯 Project Overview
+##  Project Overview
 
 ### The Challenge
 
@@ -99,7 +99,7 @@ Create a 3-class classification system:
 2. **Class 1 (AI Vanilla)** - Generic AI-generated text
 3. **Class 2 (AI Styled)** - AI mimicking Authors style
 
-## 📊 TASK 0: Dataset Creation
+##  TASK 0: Dataset Creation
 
 ### Methodology
 
@@ -146,7 +146,7 @@ Create a 3-class classification system:
 **Saved Files:**
 - `data/dataset/` 
 
-**Status:** ⚠️ Used for initial Task 1 analysis, then revised
+**Status:**  Used for initial Task 1 analysis, then revised
 
 ---
 
@@ -230,16 +230,16 @@ Create a 3-class classification system:
 ### Key Improvements from Revision
 
 **Stylistic Diversity:**
-- ✅ Colloquial (Twain) vs Formal (Austen) contrast
-- ✅ American vs British English
-- ✅ Dialogue-heavy vs Narrative-heavy
-- ✅ Action-focused vs Social-commentary-focused
+-  Colloquial (Twain) vs Formal (Austen) contrast
+-  American vs British English
+-  Dialogue-heavy vs Narrative-heavy
+-  Action-focused vs Social-commentary-focused
 
 **Metric Performance:**
-- ✅ POS ratios NOW discriminate (Twain: 0.31 vs AI: 0.36, p < 0.01)
-- ✅ Sentence variance robust across both styles
-- ✅ Punctuation patterns vary by author (expected)
-- ✅ Prevents overfitting to single author style
+-  POS ratios NOW discriminate (Twain: 0.31 vs AI: 0.36, p < 0.01)
+-  Sentence variance robust across both styles
+-  Punctuation patterns vary by author (expected)
+-  Prevents overfitting to single author style
 
 **Scientific Rigor:**
 - Cross-baseline validation demonstrates feature robustness
@@ -272,12 +272,12 @@ Create a 3-class classification system:
 - Class 3 (AI Styled): 200 paragraphs (AI mimicking Victorian style)
 
 **Initial Results:**
-- ✅ Sentence Variance: Human (14.579) vs AI (5.041) - **3x difference, THE STRONGEST SIGNAL**
-- ✅ Flesch-Kincaid: Human (Grade 12-14) > AI (Grade 8-10) - Victorian complexity
-- ✅ Punctuation: Human (8 semicolons/1000 words) > AI (2/1000) - Victorian style
-- ⚠️ TTR: AI (0.723) > Human (0.684) - counterintuitive due to length bias
-- ⚠️ Hapax: AI (0.848) > Human (0.805) - same length bias issue
-- ❌ POS Ratio: ~0.35 for all classes (NO DIFFERENCE, p=0.812) - **FAILED**
+-  Sentence Variance: Human (14.579) vs AI (5.041) - **3x difference, THE STRONGEST SIGNAL**
+-  Flesch-Kincaid: Human (Grade 12-14) > AI (Grade 8-10) - Victorian complexity
+-  Punctuation: Human (8 semicolons/1000 words) > AI (2/1000) - Victorian style
+-  TTR: AI (0.723) > Human (0.684) - counterintuitive due to length bias
+-  Hapax: AI (0.848) > Human (0.805) - same length bias issue
+-  POS Ratio: ~0.35 for all classes (NO DIFFERENCE, p=0.812) - **FAILED**
 
 **Key Issue Identified:** Victorian prose too similar to AI's formal style for some metrics
 
@@ -303,13 +303,13 @@ Create a 3-class classification system:
   - Human: **0.674** (lower)
   - AI Vanilla: **0.710** (higher)
   - AI Styled: **0.700** (middle)
-- **Statistical Test:** p < 0.000001 ✅ SIGNIFICANT
-- **Issue:** **⚠️ LENGTH BIAS CONFOUND!**
+- **Statistical Test:** p < 0.000001  SIGNIFICANT
+- **Issue:** ** LENGTH BIAS CONFOUND!**
 - **Explanation:**
   - Longer texts → more word repetition → lower TTR
   - Shorter texts → less repetition → higher TTR
   - Mathematical artifact from 37-word gap, not pure style
-- **Verdict:** ⚠️ Valid for classification but NOT interpretable as "AI has richer vocabulary" - actually means "AI writes shorter paragraphs"
+- **Verdict:**  Valid for classification but NOT interpretable as "AI has richer vocabulary" - actually means "AI writes shorter paragraphs"
 
 #### 2. Hapax Legomena
 - **Definition:** Ratio of words appearing exactly once (rare vocabulary)
@@ -317,12 +317,12 @@ Create a 3-class classification system:
   - Human: **0.524** (lower)
   - AI Vanilla: **0.585** (higher)
   - AI Styled: **0.571** (middle)
-- **Statistical Test:** p < 0.000001 ✅ SIGNIFICANT
-- **Issue:** **⚠️ SAME LENGTH BIAS as TTR**
+- **Statistical Test:** p < 0.000001  SIGNIFICANT
+- **Issue:** ** SAME LENGTH BIAS as TTR**
 - **Explanation:** Longer paragraphs naturally have lower Hapax ratios because common words ("the", "a", "is") repeat more
-- **Verdict:** ⚠️ Still useful for classification but confounded by length, not interpretable as pure style
+- **Verdict:**  Still useful for classification but confounded by length, not interpretable as pure style
 
-#### 2.5. Length Normalization Experiment 🔬 **METHODOLOGICAL BREAKTHROUGH**
+#### 2.5. Length Normalization Experiment  **METHODOLOGICAL BREAKTHROUGH**
 
 **The Problem We Identified:**
 - TTR and Hapax showed AI "higher" than Human (0.710 vs 0.674 TTR, 0.585 vs 0.524 Hapax)
@@ -344,8 +344,8 @@ We tested length normalization by extracting random 100-word windows from each p
 ##### Twain + Austen Dataset:
 | Metric | Original | Normalized | Reduction | Original p-value | Normalized p-value | Verdict |
 |--------|----------|------------|-----------|------------------|-------------------|---------|
-| **TTR** | +0.036 | +0.010 | **72.4%** ↓ | <0.000001 | 0.011 | Partially Length-Dependent ⚠️ |
-| **Hapax** | +0.061 | +0.038 | **37.7%** ↓ | <0.000001 | <0.000001 | Real Vocabulary Difference ✅ |
+| **TTR** | +0.036 | +0.010 | **72.4%** ↓ | <0.000001 | 0.011 | Partially Length-Dependent  |
+| **Hapax** | +0.061 | +0.038 | **37.7%** ↓ | <0.000001 | <0.000001 | Real Vocabulary Difference  |
 
 **Findings:**
 - **TTR:** 72% of the difference was length artifact, but 28% persists (p=0.011)
@@ -355,28 +355,28 @@ We tested length normalization by extracting random 100-word windows from each p
 ##### Dickens + Austen Dataset (Victorian):
 | Metric | Original | Normalized | Reduction | Original p-value | Normalized p-value | Verdict |
 |--------|----------|------------|-----------|------------------|-------------------|---------|
-| **TTR** | +0.036 | +0.004 | **88.1%** ↓ | <0.000001 | 0.306 | Length Bias CONFIRMED! 🎯 |
-| **Hapax** | +0.061 | +0.035 | **42.3%** ↓ | <0.000001 | <0.000001 | Real Vocabulary Difference ✅ |
+| **TTR** | +0.036 | +0.004 | **88.1%** ↓ | <0.000001 | 0.306 | Length Bias CONFIRMED!  |
+| **Hapax** | +0.061 | +0.035 | **42.3%** ↓ | <0.000001 | <0.000001 | Real Vocabulary Difference  |
 
 **Findings:**
 - **TTR:** 88% was length artifact, difference VANISHED (p=0.306 - NOT significant!)
 - **Hapax:** 42% was length artifact, but 58% persists (p<0.000001)
 - **Victorian validation:** TTR is almost entirely a length confound with formal authors
 
-**🎯 KEY DISCOVERIES:**
+** KEY DISCOVERIES:**
 
-1. **TTR is Dataset-Dependent ⚠️**
+1. **TTR is Dataset-Dependent **
    - Victorian (Dickens): **88% length artifact** - difference vanished
    - Twain: **72% length artifact** - difference reduced but persists
    - **Why?** Dickens' formal vocabulary makes TTR purely length-driven, Twain's colloquial vocabulary adds a small real effect
    - **Conclusion:** TTR validity depends on baseline author selection!
 
-2. **Hapax is ROBUST ✅**
+2. **Hapax is ROBUST **
    - Consistent ~40% reduction across BOTH datasets (37.7% Twain, 42.3% Victorian)
    - Always remains significant (p<0.000001) even after normalization
    - **Conclusion:** AI genuinely uses rare words differently, regardless of paragraph length or author style!
 
-3. **Methodological Victory 🏆**
+3. **Methodological Victory **
    - **Proved:** "AI has richer vocabulary" claim is **MOSTLY FALSE**
    - **Truth:** 70-90% of TTR difference is paragraph length, only 10-30% is real
    - **Impact:** Questions decades of TTR-based authorship studies
@@ -419,10 +419,10 @@ This is the **first AI detection study** to:
 #### 3. POS Distribution (Adjective/Noun Ratio)
 - **Hypothesis:** AI "over-describes" with excessive adjectives
 - **Results:**
-  - Human (Twain): **0.313** (fewer adjectives) ✅
+  - Human (Twain): **0.313** (fewer adjectives) 
   - AI Vanilla: **0.356** (more adjectives)
   - AI Styled: **0.346** (middle)
-- **Statistical Test:** p = 0.024 ✅ **NOW SIGNIFICANT!** (Was failing with Dickens)
+- **Statistical Test:** p = 0.024  **NOW SIGNIFICANT!** (Was failing with Dickens)
 - **Why It Works Now:**
   - **Twain's colloquial style:** Action-focused, minimal description, dialogue-heavy
   - **AI's analytical style:** Formal, descriptive, academic tone
@@ -431,27 +431,27 @@ This is the **first AI detection study** to:
   - Dickens used tons of adjectives (Victorian prose)
   - Dickens (0.35) ≈ AI (0.35) - no difference!
   - Twain (0.31) < AI (0.36) - clear difference!
-- **Verdict:** ✅ **VALID METRIC** for distinguishing colloquial vs formal styles!
+- **Verdict:**  **VALID METRIC** for distinguishing colloquial vs formal styles!
 
-#### 4. Sentence Length Variance ⭐ **THE SMOKING GUN**
+#### 4. Sentence Length Variance  **THE SMOKING GUN**
 - **Definition:** Standard deviation of sentence lengths within a paragraph
 - **Results:**
   - Human (Twain + Austen): **13.697** (highly varied)
   - AI Vanilla: **5.456** (monotonous)
   - AI Styled: **6.009** (slightly less monotonous)
 - **Difference:** Human varies **2.5x more** than AI (+8.241 difference!)
-- **Statistical Test:** p < 0.0000000001 ✅ **EXTREMELY SIGNIFICANT (22σ effect!)**
+- **Statistical Test:** p < 0.0000000001  **EXTREMELY SIGNIFICANT (22σ effect!)**
 - **t-statistic:** 22.3 (massive effect size)
 - **Why This is THE Metric:**
-  1. ✅ **Length-independent** - NOT affected by paragraph length (unlike TTR/Hapax)
-  2. ✅ **2.5x difference** - Huge, consistent gap
-  3. ✅ **Reveals structure** - AI's mechanical rhythm vs human's natural flow
-  4. ✅ **Consistent pattern** - Works across Victorian AND Twain datasets
+  1.  **Length-independent** - NOT affected by paragraph length (unlike TTR/Hapax)
+  2.  **2.5x difference** - Huge, consistent gap
+  3.  **Reveals structure** - AI's mechanical rhythm vs human's natural flow
+  4.  **Consistent pattern** - Works across Victorian AND Twain datasets
 - **What It Shows:**
   - **Humans:** Mix of short punchy sentences (2-5 words) + long flowing sentences (30-40 words)
   - **AI:** ALL sentences cluster around 15-20 words ("middle zone" trap)
   - AI avoids extremes, humans use the full range
-- **Verdict:** 🏆 **STRONGEST DISTINGUISHER - THE AI FINGERPRINT**
+- **Verdict:**  **STRONGEST DISTINGUISHER - THE AI FINGERPRINT**
 
 #### 5. Punctuation Density
 - **Method:** Total aggregation - sum ALL punctuation / total words × 1000
@@ -459,7 +459,7 @@ This is the **first AI detection study** to:
   - **Semicolons:** Human (13.21) vs AI (4.27) → **3.1x more!**
   - **Em-dashes:** Human (12.39) vs AI (6.43) → **1.9x more!**
   - **Exclamations:** Human (3.49) vs AI (0.11) → **31x more!!**
-- **Statistical Test:** All p < 0.000001 ✅ HIGHLY SIGNIFICANT
+- **Statistical Test:** All p < 0.000001  HIGHLY SIGNIFICANT
 - **Interpretation:**
   - **Twain's narrative fiction style:** Dramatic punctuation for emotional effect, dialogue emphasis
   - **AI's analytical prose:** Minimal dramatic punctuation, formal modern style
@@ -467,7 +467,7 @@ This is the **first AI detection study** to:
 - **Method Comparison:**
   - Per-paragraph average vs total aggregation: Nearly identical results (difference < 0.5 per 1000 words)
   - Total aggregation preferred - eliminates any paragraph-length bias
-- **Verdict:** ✅ Valid distinguisher revealing narrative vs analytical style differences
+- **Verdict:**  Valid distinguisher revealing narrative vs analytical style differences
 
 #### 6. Flesch-Kincaid Readability
 - **Definition:** U.S. grade level required to understand text
@@ -476,18 +476,18 @@ This is the **first AI detection study** to:
   - AI Vanilla: **Grade 10.61** (slightly more complex)
   - AI Styled: **Grade 8.48** (oversimplified)
 - **Statistical Tests:**
-  - Human vs AI Vanilla: p = 0.011 ✅ SIGNIFICANT (0.62 grade difference)
-  - Human vs AI Styled: p < 0.000001 ✅ HIGHLY SIGNIFICANT (1.51 grade difference)
-  - AI Vanilla vs AI Styled: p < 0.000001 ✅ HIGHLY SIGNIFICANT (2.13 grade difference)
+  - Human vs AI Vanilla: p = 0.011  SIGNIFICANT (0.62 grade difference)
+  - Human vs AI Styled: p < 0.000001  HIGHLY SIGNIFICANT (1.51 grade difference)
+  - AI Vanilla vs AI Styled: p < 0.000001  HIGHLY SIGNIFICANT (2.13 grade difference)
 - **Interpretation:**
   - **Twain hits the sweet spot:** Grade 10 (high school accessible, perfect balance)
   - **AI Vanilla overshoots:** Grade 10.6 (tries too hard to sound formal/academic)
   - **AI Styled undershoots:** Grade 8.5 (dumbs down Twain's style too much)
 - **The Pattern:** Twain balances simple vocabulary + complex emotional rhythm. AI can't hit this balance - either too formal or too simple.
 - **Comparison to Victorian Dataset:** With Dickens, Human was Grade 12-14 (complex) > AI Grade 8-10 (simpler). Pattern REVERSED with Twain!
-- **Verdict:** ✅ Significant for classification but direction depends on human author's complexity level
+- **Verdict:**  Significant for classification but direction depends on human author's complexity level
 
-#### 7. Dependency Tree Depth 🔄 **AUTHOR DEPENDENCY VALIDATED**
+#### 7. Dependency Tree Depth  **AUTHOR DEPENDENCY VALIDATED**
 
 **Definition:** Average depth of syntactic parse trees (measures how deeply clauses are nested using spaCy's dependency parser)
 
@@ -503,8 +503,8 @@ This is the **first AI detection study** to:
 
 | Dataset | Human | AI Vanilla | AI Styled | Pattern | p-value |
 |---------|-------|------------|-----------|---------|---------|
-| **Victorian (Dickens+Austen)** | 6.525 | 6.103 | 6.122 | Human > AI ✅ | 0.023 |
-| **Twain+Austen** | 5.530 | 5.882 | 6.263 | Human < AI ⚠️ | 0.021 |
+| **Victorian (Dickens+Austen)** | 6.525 | 6.103 | 6.122 | Human > AI  | 0.023 |
+| **Twain+Austen** | 5.530 | 5.882 | 6.263 | Human < AI  | 0.021 |
 
 **Pattern REVERSED depending on human baseline!**
 
@@ -520,7 +520,7 @@ This is the **first AI detection study** to:
 **AI Vanilla: 6.103** (shallower than human)
 **AI Styled: 6.122** (shallower than human)
 - AI attempts formal style but doesn't match Dickens' complexity
-- Result: **Human > AI** (6.525 vs 6.103, p=0.023) ✅
+- Result: **Human > AI** (6.525 vs 6.103, p=0.023) 
 
 ---
 
@@ -535,7 +535,7 @@ This is the **first AI detection study** to:
 **AI Styled: 6.263** (deepest - attempting formal prose)
 - "The young gentleman, who had been entrusted with the task that his guardian had deemed necessary for his moral improvement, which required considerable diligence, approached..."
 - Multiple embedded clauses, formal subordination
-- Result: **AI > Human** (6.263 vs 5.530, p=0.021) ⚠️
+- Result: **AI > Human** (6.263 vs 5.530, p=0.021) 
 
 ---
 
@@ -550,8 +550,7 @@ Colloquial ←─────────────────────→
 
 **What Tree Depth Actually Measures:**
 
-❌ **NOT AI vs Human authorship** (pattern reverses with different authors!)
-✅ **Writing formality level** (colloquial vs academic vs literary)
+ **NOT AI vs Human authorship** (pattern reverses with different authors!)  **Writing formality level** (colloquial vs academic vs literary)
 
 **Author Style Rankings:**
 1. **Dickens (Victorian formal):** 6.5+ depth - complex literary prose
@@ -588,7 +587,7 @@ This explains Task 4 adversarial results perfectly:
 
 **Literature Confirmation:**
 
-Research states: "AI tends to produce deeper/more complex structures" ✅
+Research states: "AI tends to produce deeper/more complex structures" 
 
 **BUT it depends on the prompt:**
 - Formal prompt → AI creates 6.0-6.3 depth (matches our AI Styled: 6.263)
@@ -604,18 +603,18 @@ Research states: "AI tends to produce deeper/more complex structures" ✅
 1. **Sentence Variance** (Universal - ALWAYS works):
    - Victorian: Human 14.6 vs AI 5.0 (3x difference)
    - Twain: Human 13.7 vs AI 5.5 (2.5x difference)
-   - **Pattern: ALWAYS Human > AI regardless of author** ✅
+   - **Pattern: ALWAYS Human > AI regardless of author** 
    - This is THE AI fingerprint (mechanical pacing limitation)
 
 2. **Tree Depth** (Author-dependent - varies by baseline):
    - Victorian: Human 6.525 > AI 6.103 (Dickens formal > AI)
    - Twain: Human 5.530 < AI 6.263 (Twain colloquial < AI formal)
-   - **Pattern: Depends on author's formality level** ⚠️
+   - **Pattern: Depends on author's formality level** 
    - This is a GENRE/STYLE marker, not AI detection
 
 ---
 
-**Verdict:** ✅ **VALID CLASSIFICATION FEATURE, NOT AI FINGERPRINT**
+**Verdict:**  **VALID CLASSIFICATION FEATURE, NOT AI FINGERPRINT**
 
 **What it's useful for:**
 - Distinguishing colloquial vs formal writing (classification feature)
@@ -714,7 +713,7 @@ Research states: "AI tends to produce deeper/more complex structures" ✅
 
 ### Key Correlation Findings
 
-#### 1. TTR and Hapax ARE Highly Redundant (r = 0.94 and 0.93) 🔴
+#### 1. TTR and Hapax ARE Highly Redundant (r = 0.94 and 0.93) 
 
 **Twain Dataset:** r = **0.940** (94% shared variance!)
 **Victorian Dataset:** r = **0.927** (93% shared variance!)
@@ -733,7 +732,7 @@ Research states: "AI tends to produce deeper/more complex structures" ✅
 
 ---
 
-#### 2. Length Bias Confirmed Through Correlations 🔴
+#### 2. Length Bias Confirmed Through Correlations 
 
 **TTR ↔ Paragraph Length:**
 - **Twain:** r = **-0.738** (strong negative correlation)
@@ -759,7 +758,7 @@ Research states: "AI tends to produce deeper/more complex structures" ✅
 
 ---
 
-#### 3. Sentence Variance is MOSTLY Independent ⭐
+#### 3. Sentence Variance is MOSTLY Independent 
 
 **Maximum correlation with other features:**
 - **Twain:** r = **0.602** with Flesch-Kincaid (only moderate correlation)
@@ -811,7 +810,7 @@ Research states: "AI tends to produce deeper/more complex structures" ✅
 
 ---
 
-#### 5. Length Normalization Changes Correlation Structure 🔄
+#### 5. Length Normalization Changes Correlation Structure 
 
 **Original TTR ↔ Original Hapax:**
 - **Twain:** r = **0.940** (near-perfect redundancy)
@@ -846,7 +845,7 @@ Research states: "AI tends to produce deeper/more complex structures" ✅
 
 Based on correlation analysis across BOTH datasets:
 
-#### Tier 1 - Independent Signals (MUST KEEP) ⭐
+#### Tier 1 - Independent Signals (MUST KEEP) 
 
 1. **Sentence Length Variance**
    - Near-zero correlation with vocabulary (|r| < 0.26)
@@ -865,7 +864,7 @@ Based on correlation analysis across BOTH datasets:
 
 ---
 
-#### Tier 2 - Redundant (CHOOSE ONE FROM PAIR) ⚠️
+#### Tier 2 - Redundant (CHOOSE ONE FROM PAIR) 
 
 4. **Original TTR vs Original Hapax**
    - Correlation: r = **0.94** (eliminate one)
@@ -879,7 +878,7 @@ Based on correlation analysis across BOTH datasets:
 
 ---
 
-#### Tier 3 - Composite/Derivative (OPTIONAL) 💡
+#### Tier 3 - Composite/Derivative (OPTIONAL) 
 
 6. **Flesch-Kincaid Grade Level**
    - Composite of sentence length + syllable count
@@ -896,18 +895,18 @@ Based on correlation analysis across BOTH datasets:
 ### Optimal Feature Set for AI Detection
 
 **Minimal Independent Set (3 features):**
-1. ⭐ **Sentence Length Variance** (structural rhythm - THE fingerprint)
-2. ⭐ **Hapax_Normalized** (vocabulary diversity - length-controlled)
-3. ⭐ **Paragraph Length** (direct length measurement)
+1.  **Sentence Length Variance** (structural rhythm - THE fingerprint)
+2.  **Hapax_Normalized** (vocabulary diversity - length-controlled)
+3.  **Paragraph Length** (direct length measurement)
 
 **Extended Set (5 features):**
-4. 📊 **Punctuation Density** (stylistic markers - semicolons, em-dashes)
-5. 📊 **Dependency Tree Depth** (formality level - context-specific)
+4.  **Punctuation Density** (stylistic markers - semicolons, em-dashes)
+5.  **Dependency Tree Depth** (formality level - context-specific)
 
 **DO NOT INCLUDE:**
-- ❌ TTR (use Hapax instead - same information, Hapax more robust)
-- ❌ Original TTR/Hapax (use normalized versions - removes length confound)
-- ❌ Flesch-Kincaid (redundant with sentence variance)
+-  TTR (use Hapax instead - same information, Hapax more robust)
+-  Original TTR/Hapax (use normalized versions - removes length confound)
+-  Flesch-Kincaid (redundant with sentence variance)
 
 ---
 
@@ -917,10 +916,10 @@ Based on correlation analysis across BOTH datasets:
 
 |             | Original ↔ Length | Normalized ↔ Length | Reduction |
 |-------------|------------------|---------------------|-----------|
-| **TTR (Twain)**      | r = -0.717       | r = -0.030          | **95.8%** ✅ |
-| **TTR (Victorian)**  | r = -0.605       | r = -0.028          | **95.4%** ✅ |
-| **Hapax (Twain)**    | r = -0.576       | r = +0.046          | **92.0%** ✅ |
-| **Hapax (Victorian)**| r = -0.506       | r = -0.056          | **88.9%** ✅ |
+| **TTR (Twain)**      | r = -0.717       | r = -0.030          | **95.8%**  |
+| **TTR (Victorian)**  | r = -0.605       | r = -0.028          | **95.4%**  |
+| **Hapax (Twain)**    | r = -0.576       | r = +0.046          | **92.0%**  |
+| **Hapax (Victorian)**| r = -0.506       | r = -0.056          | **88.9%**  |
 
 **Average correlation reduction:** **93.0%** (validates normalization success)
 
@@ -991,17 +990,16 @@ Based on correlation analysis across BOTH datasets:
 ### Implications for Classification (Task 2)
 
 **Feature Selection Guidance:**
-
-✅ **MUST INCLUDE (Independent Signals):**
+  **MUST INCLUDE (Independent Signals):**
 - Sentence Length Variance (strongest + independent)
 - Hapax_Normalized OR TTR_Normalized (vocabulary, pick one)
 - Paragraph Length (direct measurement)
 
-⚠️ **MAY INCLUDE (Conditional Value):**
+ **MAY INCLUDE (Conditional Value):**
 - Punctuation density (style marker, some independence)
 - Tree depth (if author baseline is consistent)
 
-❌ **SHOULD EXCLUDE (Redundant):**
+ **SHOULD EXCLUDE (Redundant):**
 - Both TTR AND Hapax (r = 0.94 - pick one)
 - Original TTR/Hapax without normalization (length-confounded)
 - Flesch-Kincaid if using sentence variance (r = 0.60 - redundant)
@@ -1027,14 +1025,14 @@ Based on correlation analysis across BOTH datasets:
 
 | Metric | Victorian Dataset | Twain + Austen Dataset | Insight |
 |--------|------------------|----------------------|---------|
-| **Sentence Variance** | Human 14.6 vs AI 5.0 (3x) ✅ | Human 13.7 vs AI 5.5 (2.5x) ✅ | **ROBUST - Works on both! Universal AI fingerprint** |
-| **Dependency Tree Depth** | Human 6.525 > AI 6.103 ✅ | Human 5.530 < AI 6.263 ⚠️ | **Author-dependent! Measures formality (Dickens formal, Twain colloquial)** |
-| **TTR (Original)** | AI 0.723 > Human 0.684 ⚠️ | AI 0.710 > Human 0.674 ⚠️ | Length-confounded on both |
-| **TTR (Normalized 100-word)** | AI 0.714 ≈ Human 0.709 (88% artifact) ❌ | AI 0.715 > Human 0.705 (72% artifact) ⚠️ | **Dataset-dependent! Victorian = pure length bias, Twain = partial real effect** |
-| **Hapax (Original)** | AI 0.848 > Human 0.805 ⚠️ | AI 0.585 > Human 0.524 ⚠️ | Length-confounded on both |
-| **Hapax (Normalized 100-word)** | AI 0.595 > Human 0.560 (42% artifact) ✅ | AI 0.595 > Human 0.556 (38% artifact) ✅ | **ROBUST - Real ~40% effect survives normalization on both!** |
-| **POS Ratio** | No difference (p=0.812) ❌ | Human 0.313 < AI 0.356 ✅ | **Author-dependent!** |
-| **Punctuation** | Human 8 > AI 2 (semicolons) ✅ | Human 13.2 > AI 4.3 (semicolons) ✅ | Both show human > AI |
+| **Sentence Variance** | Human 14.6 vs AI 5.0 (3x)  | Human 13.7 vs AI 5.5 (2.5x)  | **ROBUST - Works on both! Universal AI fingerprint** |
+| **Dependency Tree Depth** | Human 6.525 > AI 6.103  | Human 5.530 < AI 6.263  | **Author-dependent! Measures formality (Dickens formal, Twain colloquial)** |
+| **TTR (Original)** | AI 0.723 > Human 0.684  | AI 0.710 > Human 0.674  | Length-confounded on both |
+| **TTR (Normalized 100-word)** | AI 0.714 ≈ Human 0.709 (88% artifact)  | AI 0.715 > Human 0.705 (72% artifact)  | **Dataset-dependent! Victorian = pure length bias, Twain = partial real effect** |
+| **Hapax (Original)** | AI 0.848 > Human 0.805  | AI 0.585 > Human 0.524  | Length-confounded on both |
+| **Hapax (Normalized 100-word)** | AI 0.595 > Human 0.560 (42% artifact)  | AI 0.595 > Human 0.556 (38% artifact)  | **ROBUST - Real ~40% effect survives normalization on both!** |
+| **POS Ratio** | No difference (p=0.812)  | Human 0.313 < AI 0.356  | **Author-dependent!** |
+| **Punctuation** | Human 8 > AI 2 (semicolons)  | Human 13.2 > AI 4.3 (semicolons)  | Both show human > AI |
 | **Flesch-Kincaid** | Human Grade 12-14 > AI 8-10 | AI 10.6 > Human 9.99 | **REVERSED pattern!** |
 
 **Key Insights from Comparison:**
@@ -1045,8 +1043,8 @@ Based on correlation analysis across BOTH datasets:
    - This is a true mechanical limitation of AI generation
 
 2. **Dependency Tree Depth is AUTHOR-DEPENDENT (Validated Across Datasets!):**
-   - Victorian (Dickens formal): Human 6.525 > AI 6.103 ✅ (hypothesis confirmed)
-   - Twain (colloquial): Human 5.530 < AI 6.263 ⚠️ (hypothesis reversed!)
+   - Victorian (Dickens formal): Human 6.525 > AI 6.103  (hypothesis confirmed)
+   - Twain (colloquial): Human 5.530 < AI 6.263  (hypothesis reversed!)
    - **Pattern switches with author formality level**
    - Proves syntax complexity measures STYLE, not AI vs Human
    - AI defaults to moderate formality (6.0-6.3) - can't match Dickens peak (6.5+) or Twain simplicity (5.5)
@@ -1116,7 +1114,7 @@ Based on correlation analysis across BOTH datasets:
 **Approach:** Traditional ML with 10 engineered linguistic features from Task 1
 
 **Feature Set:**
-1. Sentence length variance ⭐ (THE key metric from Task 1)
+1. Sentence length variance  (THE key metric from Task 1)
 2. Sentence length mean
 3. Paragraph length (word count)
 4. Type-Token Ratio (TTR)
@@ -1157,7 +1155,7 @@ RandomForestClassifier(
 - **Training Set:** 799 samples (stratified 80/20 split)
 
 **Overall Performance:**
-- **Test Accuracy: 91.00%** ✨ (far exceeds 70-85% expectation)
+- **Test Accuracy: 91.00%**  (far exceeds 70-85% expectation)
 - **Baseline (Random):** 33.33%
 - **Improvement:** +57.67 percentage points
 - Training Accuracy: 98.75%
@@ -1170,14 +1168,13 @@ RandomForestClassifier(
 - Fold 4: 88.12%
 - Fold 5: 85.00%
 - **Mean: 88.00% ± 3.05%**
-
-✅ **Low standard deviation = consistent, robust performance**
+  **Low standard deviation = consistent, robust performance**
 
 **Per-Class Performance:**
 
 | Class | Precision | Recall | F1-Score | Accuracy |
 |-------|-----------|--------|----------|----------|
-| **Human** | 93.40% | **99.00%** | 96.12% | **99.00%** ✨ |
+| **Human** | 93.40% | **99.00%** | 96.12% | **99.00%**  |
 | **AI Vanilla** | 92.98% | 88.33% | 90.60% | 88.33% |
 | **AI Styled** | 81.08% | 75.00% | 77.92% | 75.00% |
 
@@ -1206,9 +1203,9 @@ Human              1         0       99
 
 | Rank | Feature | Importance Score | Insight |
 |------|---------|------------------|---------|
-| 🥇 1 | **Sentence Length Mean** | 0.2222 (22.2%) | Humans write longer sentences |
-| 🥈 2 | **Paragraph Length** | 0.2143 (21.4%) | Controls for length confounds |
-| 🥉 3 | **Sentence Length Variance** | 0.1906 (19.1%) | **Human writing 10x more variable** |
+|  1 | **Sentence Length Mean** | 0.2222 (22.2%) | Humans write longer sentences |
+|  2 | **Paragraph Length** | 0.2143 (21.4%) | Controls for length confounds |
+|  3 | **Sentence Length Variance** | 0.1906 (19.1%) | **Human writing 10x more variable** |
 | 4 | Flesch-Kincaid Grade Mean | 0.1360 (13.6%) | Readability complexity |
 | 5 | TTR | 0.0758 (7.6%) | Vocabulary diversity |
 
@@ -1226,7 +1223,7 @@ Human              1         0       99
 - **Training Set:** 1,142 samples (stratified 80/20 split)
 
 **Overall Performance:**
-- **Test Accuracy: 83.57%** ✅ (2.5x better than random 33%)
+- **Test Accuracy: 83.57%**  (2.5x better than random 33%)
 - **Baseline (Random):** 33.33%
 - **Improvement:** +50.24 percentage points
 - Training Accuracy: 95.36%
@@ -1234,11 +1231,10 @@ Human              1         0       99
 
 **5-Fold Cross-Validation:**
 - **Mean: 82.22% ± 1.04%**
-
-✅ **MORE STABLE than Victorian (1.04% vs 3.05% std dev)!**
+  **MORE STABLE than Victorian (1.04% vs 3.05% std dev)!**
 
 **Per-Class Performance:**
-- **Human: 87.23%** (down from 99%!) ⚠️
+- **Human: 87.23%** (down from 99%!) 
 - AI Vanilla: 86.02%
 - AI Styled: 77.78%
 
@@ -1246,9 +1242,9 @@ Human              1         0       99
 
 | Rank | Feature | Importance Score | Change from Victorian |
 |------|---------|------------------|----------------------|
-| 🥇 1 | **Sentence Length Variance** | **21.13%** ⭐ | **NOW #1!** (was #3) |
-| 🥈 2 | **Sentence Length Mean** | **19.95%** | (was #1) |
-| 🥉 3 | **Flesch-Kincaid Grade Mean** | **17.29%** | Jumped from 13.60% |
+|  1 | **Sentence Length Variance** | **21.13%**  | **NOW #1!** (was #3) |
+|  2 | **Sentence Length Mean** | **19.95%** | (was #1) |
+|  3 | **Flesch-Kincaid Grade Mean** | **17.29%** | Jumped from 13.60% |
 | 4 | Paragraph Length | 11.37% | Dropped from 21.43% |
 | 5 | FK Grade Variance | 8.79% | Similar |
 
@@ -1288,7 +1284,7 @@ Human              1         0       99
 - Sentence variance #3 (19.06%)
 
 **Twain Dataset priorities:**
-- **Sentence variance became #1 (21.13%)** ✅ Validates Task 1!
+- **Sentence variance became #1 (21.13%)**  Validates Task 1!
 - FK grade importance jumped (13.60% → 17.29%)
 - Para_length importance dropped (21.43% → 11.37%)
 
@@ -1300,27 +1296,23 @@ Human              1         0       99
 #### 3. **Cross-Validation Stability**
 
 - Victorian: 3.05% std dev
-- Twain: **1.04% std dev** ✅ MORE STABLE!
+- Twain: **1.04% std dev**  MORE STABLE!
 
 Even with lower accuracy, Twain model is MORE CONSISTENT across folds. This suggests the model is robust, just dealing with harder data.
 
 #### 4. **What This Proves**
-
-✅ **Sentence variance validated as THE metric:**
+  **Sentence variance validated as THE metric:**
 - Task 1: 22σ effect size (statistical finding)
 - Task 2: Became #1 feature with Twain (ML validation)
 - Robust across both datasets (top 3 in both)
-
-✅ **Length bias is helpful, not just harmful:**
+  **Length bias is helpful, not just harmful:**
 - Para_length 11-21% importance across datasets
 - Helps classification despite confounding vocabulary metrics
-
-✅ **Human vs AI separation depends on author:**
+  **Human vs AI separation depends on author:**
 - Complex authors (Dickens): 99% human detection
 - Variable authors (Twain): 87% human detection
 - AI consistency is its tell
-
-✅ **83.57% is research-worthy:**
+  **83.57% is research-worthy:**
 - 2.5x better than random (33%)
 - Proves structural features work
 - Performance drop reveals insights about human writing variability
@@ -1388,14 +1380,14 @@ AI Styled:  Slightly wider [3 - 276], still constrained
 ### Summary: What Works and Why
 
 **Robust Across Both Datasets:**
-- ✅ Sentence variance (19-21% importance, top 3 both datasets)
-- ✅ Sentence length mean (20-22% importance, top 2 both datasets)
-- ✅ Overall accuracy 2.5x-2.7x better than random baseline
+-  Sentence variance (19-21% importance, top 3 both datasets)
+-  Sentence length mean (20-22% importance, top 2 both datasets)
+-  Overall accuracy 2.5x-2.7x better than random baseline
 
 **Author-Dependent:**
-- ⚠️ Human detection: 99% (Dickens) vs 87% (Twain)
-- ⚠️ Feature priorities shift based on baseline complexity
-- ⚠️ FK grade importance varies (13.60% → 17.29%)
+-  Human detection: 99% (Dickens) vs 87% (Twain)
+-  Feature priorities shift based on baseline complexity
+-  FK grade importance varies (13.60% → 17.29%)
 
 **The Bottom Line:**
 - **Victorian (91%):** "AI is easy to detect when human baseline is complex and consistent"
@@ -1443,12 +1435,12 @@ AI Styled:  Slightly wider [3 - 276], still constrained
 
 #### Key Findings
 
-1. ✅ **Statistical features alone achieve 83-91% accuracy** - No embeddings or transformers needed
-2. ✅ **Human writing has 10x more sentence variance** - This is the "fingerprint"
-3. ✅ **Humans highly detectable (87-99%)** - Strong positive signal
-4. ⚠️ **AI Styled partially fools the classifier (23-25% error)** - Style mimicry has some success
-5. ✅ **Model generalizes well** - Low train-test gap, consistent cross-validation
-6. ✅ **Cross-dataset validation** - 91% Victorian, 83.57% Twain proves robustness
+1.  **Statistical features alone achieve 83-91% accuracy** - No embeddings or transformers needed
+2.  **Human writing has 10x more sentence variance** - This is the "fingerprint"
+3.  **Humans highly detectable (87-99%)** - Strong positive signal
+4.  **AI Styled partially fools the classifier (23-25% error)** - Style mimicry has some success
+5.  **Model generalizes well** - Low train-test gap, consistent cross-validation
+6.  **Cross-dataset validation** - 91% Victorian, 83.57% Twain proves robustness
 
 #### Implications
 
@@ -1565,13 +1557,13 @@ Input: 300 dimensions (averaged GloVe) ↓ Dense Layer 1: 128 neurons + ReLU + D
 
 | Metric | Value |
 |--------|-------|
-| **Test Accuracy** | **95.00%** 🎉 |
+| **Test Accuracy** | **95.00%**  |
 | **Tier A (Statistician)** | 91.00% |
 | **Difference** | **+4.00 percentage points** |
 | **Baseline (Random)** | 33.33% |
 | **Improvement over Baseline** | +61.67 percentage points |
 
-**🎉 TIER B BEATS TIER A - Unexpected result!**
+** TIER B BEATS TIER A - Unexpected result!**
 
 **Training Dynamics:**
 
@@ -1598,8 +1590,8 @@ Input: 300 dimensions (averaged GloVe) ↓ Dense Layer 1: 128 neurons + ReLU + D
 **The Unexpected 99% Human Accuracy:**
 
 Out of 100 human paragraphs in test set:
-- ✅ **99 correctly identified** as Human
-- ❌ **1 misclassified** as AI_Styled
+-  **99 correctly identified** as Human
+-  **1 misclassified** as AI_Styled
 - **Accuracy: 99/100 = 99.00%**
 
 **Why We Got 99% (Not a Bug!):**
@@ -1680,7 +1672,7 @@ Out of 100 human paragraphs in test set:
 - **Training Set:** 1,142 samples (stratified 80/20 split)
 
 **Overall Performance:**
-- **Test Accuracy: 95.45%** 🎉 (BEATS Tier A by +11.9 points!)
+- **Test Accuracy: 95.45%**  (BEATS Tier A by +11.9 points!)
 - **Baseline (Random):** 33.33%
 - **Improvement over Baseline:** +62.12 percentage points
 - Training Accuracy: 98.47%
@@ -1688,7 +1680,7 @@ Out of 100 human paragraphs in test set:
 - Epochs trained: 29 (early stopped)
 
 **Per-Class Performance:**
-- **Human: 98.94%** ✨ (93/94 - nearly perfect!)
+- **Human: 98.94%**  (93/94 - nearly perfect!)
 - AI_Vanilla: 96.77% (90/93)
 - AI_Styled: 90.91% (90/99)
 
@@ -1711,7 +1703,7 @@ Out of 100 human paragraphs in test set:
 
 **Tier A (Statistician) on Twain:** 83.57% accuracy  
 **Tier B (Semanticist) on Twain:** **95.45% accuracy**  
-**Difference:** **+11.9 percentage points!** 🎯
+**Difference:** **+11.9 percentage points!** 
 
 **This REVERSES the initial hypothesis!**
 - Predicted: Structure (Tier A) would beat Semantics (Tier B)
@@ -1737,7 +1729,7 @@ Out of 100 human paragraphs in test set:
 
 | Metric | Tier A | Tier B | Improvement |
 |--------|--------|--------|-------------|
-| **Human Detection** | 87.23% | **98.94%** | **+11.7%** ✨ |
+| **Human Detection** | 87.23% | **98.94%** | **+11.7%**  |
 | **Errors** | 12/94 | **1/94** | **-11 errors!** |
 
 **Why?**
@@ -1749,7 +1741,7 @@ Out of 100 human paragraphs in test set:
 
 | Metric | Tier A | Tier B | Improvement |
 |--------|--------|--------|-------------|
-| **AI_Styled Detection** | 77.78% | **90.91%** | **+13.1%** ✅ |
+| **AI_Styled Detection** | 77.78% | **90.91%** | **+13.1%**  |
 
 **Critical insight:** Even when AI tries to mimic Victorian style:
 - Structural mimicry partially succeeds (confuses Tier A)
@@ -1795,21 +1787,21 @@ Out of 100 human paragraphs in test set:
 
 | Metric | Tier A (Statistical) | Tier B (Semantic) | Winner |
 |--------|---------------------|-------------------|--------|
-| **Overall Accuracy** | 91.00% | **95.00%** | 🥇 **Tier B (+4%)** |
-| **Human Detection** | 99.00% | 99.00% | 🤝 Tie |
-| **AI_Vanilla Detection** | 88.33% | **98.33%** | 🥇 **Tier B (+10%)** |
-| **AI_Styled Detection** | 75.00% | **80.00%** | 🥇 **Tier B (+5%)** |
-| **Interpretability** | High (feature importance) | Low (black box) | 🥇 Tier A |
-| **Speed** | Fast (CPU, seconds) | Moderate (GPU helpful) | 🥇 Tier A |
+| **Overall Accuracy** | 91.00% | **95.00%** |  **Tier B (+4%)** |
+| **Human Detection** | 99.00% | 99.00% |  Tie |
+| **AI_Vanilla Detection** | 88.33% | **98.33%** |  **Tier B (+10%)** |
+| **AI_Styled Detection** | 75.00% | **80.00%** |  **Tier B (+5%)** |
+| **Interpretability** | High (feature importance) | Low (black box) |  Tier A |
+| **Speed** | Fast (CPU, seconds) | Moderate (GPU helpful) |  Tier A |
 
 #### Head-to-Head Performance (Twain Dataset)
 
 | Metric | Tier A (Statistical) | Tier B (Semantic) | Winner |
 |--------|---------------------|-------------------|--------|
-| **Overall Accuracy** | 83.57% | **95.45%** | 🥇 **Tier B (+11.9%)** |
-| **Human Detection** | 87.23% | **98.94%** | 🥇 **Tier B (+11.7%)** |
-| **AI_Vanilla Detection** | 86.02% | **96.77%** | 🥇 **Tier B (+10.8%)** |
-| **AI_Styled Detection** | 77.78% | **90.91%** | 🥇 **Tier B (+13.1%)** |
+| **Overall Accuracy** | 83.57% | **95.45%** |  **Tier B (+11.9%)** |
+| **Human Detection** | 87.23% | **98.94%** |  **Tier B (+11.7%)** |
+| **AI_Vanilla Detection** | 86.02% | **96.77%** |  **Tier B (+10.8%)** |
+| **AI_Styled Detection** | 77.78% | **90.91%** |  **Tier B (+13.1%)** |
 
 #### Feature Comparison
 
@@ -1880,30 +1872,27 @@ Even simple averaging captures:
 ### Tier B: Technical Analysis
 
 **What Worked:**
-
-✅ **GloVe embeddings preserve discriminative information:**
+  **GloVe embeddings preserve discriminative information:**
 - 300-dimensional semantic space captures vocabulary patterns
 - Averaged embeddings maintain class-specific signatures
 - Pre-trained on 6B tokens provides rich semantic knowledge
-
-✅ **Feedforward NN sufficient for averaged embeddings:**
+  **Feedforward NN sufficient for averaged embeddings:**
 - Simple architecture (128→64→3) achieves 95-95.45%
 - Dropout prevents overfitting effectively
 - Class weights handle imbalance well
-
-✅ **Semantic features capture AI patterns structure misses:**
+  **Semantic features capture AI patterns structure misses:**
 - Word choice reveals AI training bias
 - Context patterns differ between human/AI
 - Style mimicry fails at semantic level
 
 **Remaining Challenges:**
 
-⚠️ **AI_Styled still hardest class (80-90.91%):**
+ **AI_Styled still hardest class (80-90.91%):**
 - Main confusion with AI_Vanilla (same semantic space)
 - Both AI classes share similar vocabulary patterns
 - Expected - semantic space overlap for AI-generated text
 
-⚠️ **Black box nature:**
+ **Black box nature:**
 - Cannot extract "which words" matter most
 - Feature importance not available (need Task 3 for explainability)
 - Trade-off: Higher accuracy, lower interpretability
@@ -1914,7 +1903,7 @@ Even simple averaging captures:
 
 #### 1. Semantics ≥ Structure (Context-Dependent!)
 
-**✅ Tier B wins on both datasets:**
+*  Tier B wins on both datasets:**
 - Victorian: 95% vs 91% (+4%)
 - Twain: 95.45% vs 83.57% (+11.9%)
 
@@ -2059,11 +2048,11 @@ Even simple averaging captures:
 
 #### Lessons Learned
 
-1. ✅ **Hypothesis testing matters** - We expected 75-85%, got 95-95.45%, investigated why
-2. ✅ **Context is everything** - Victorian/Twain vs modern explains "too good" result
-3. ✅ **Simple can be powerful** - Averaged embeddings + shallow NN = 95%+
-4. ✅ **Error analysis reveals truth** - 99% Human accuracy led to temporal gap discovery
-5. ✅ **Cross-dataset validation** - Consistent 95%+ across both Victorian and Twain proves robustness
+1.  **Hypothesis testing matters** - We expected 75-85%, got 95-95.45%, investigated why
+2.  **Context is everything** - Victorian/Twain vs modern explains "too good" result
+3.  **Simple can be powerful** - Averaged embeddings + shallow NN = 95%+
+4.  **Error analysis reveals truth** - 99% Human accuracy led to temporal gap discovery
+5.  **Cross-dataset validation** - Consistent 95%+ across both Victorian and Twain proves robustness
 
 #### Next Steps
 
@@ -2087,16 +2076,16 @@ Even simple averaging captures:
 
 
 
-## Task 2 - Tier C: The Transformer 🤖
+## Task 2 - Tier C: The Transformer 
 
 **Objective:** Use the full power of modern NLP - fine-tune a transformer (DistilBERT) with LoRA to combine structure, semantics, and contextual understanding.
 
 **Hypothesis:** Transformers should beat both Tier A and Tier B by capturing:
-- ✅ Structure (via position embeddings)
-- ✅ Semantics (via contextual embeddings)
-- ✅ Word order (preserved in attention)
-- ✅ Long-range dependencies (self-attention mechanism)
-- ✅ Grammar patterns (pre-trained knowledge)
+-  Structure (via position embeddings)
+-  Semantics (via contextual embeddings)
+-  Word order (preserved in attention)
+-  Long-range dependencies (self-attention mechanism)
+-  Grammar patterns (pre-trained knowledge)
 
 **Expected:** 96-98% accuracy (highest of all tiers)
 
@@ -2143,7 +2132,7 @@ Output: [P(AI_Styled), P(AI_Vanilla), P(Human)]
 
 ### Results: The Best and The Worst
 
-#### Victorian Dataset: 59.00% Accuracy - CATASTROPHIC FAILURE ❌
+#### Victorian Dataset: 59.00% Accuracy - CATASTROPHIC FAILURE 
 
 **What Happened:**
 ```
@@ -2186,17 +2175,17 @@ Validation vs Test:
    - **Prediction:** Tier B on Victorian would achieve 93-96% accuracy
 
 **Key Insight:** This is NOT a failure to document - it's a **valuable negative result**! Shows exactly when transformers fail:
-- ✅ Small datasets (<1000 samples)
-- ✅ Out-of-distribution language (historical text)
-- ✅ Domain mismatch between pre-training and target task
+-  Small datasets (<1000 samples)
+-  Out-of-distribution language (historical text)
+-  Domain mismatch between pre-training and target task
 
 ---
 
-#### Twain Dataset: 97.20% Accuracy - NEW RECORD! ✅
+#### Twain Dataset: 97.20% Accuracy - NEW RECORD! 
 
 **Overall Performance:**
 ```
-Test Accuracy: 97.20% 🎉 (HIGHEST ACROSS ALL TIERS!)
+Test Accuracy: 97.20%  (HIGHEST ACROSS ALL TIERS!)
 Test Precision: 97.26%
 Test Recall: 97.20%
 Test F1-Score: 97.20%
@@ -2358,7 +2347,7 @@ DistilBERT: Self-attention detects register shift mid-paragraph
 
 #### Performance Metrics
 
-**Test Set Accuracy: 59.00%** ⚠️
+**Test Set Accuracy: 59.00%** 
 
 | Metric | Value |
 |--------|-------|
@@ -2408,10 +2397,10 @@ Human             0         5        95    ← 5% error rate (correct)
 
 | Metric | Tier A (Statistical) | Tier B (Semantic) | Tier C (Transformer) | Expected |
 |--------|---------------------|-------------------|---------------------|----------|
-| **Overall Accuracy** | 91.00% | **95.00%** | 59.00% ❌ | 96-98% |
+| **Overall Accuracy** | 91.00% | **95.00%** | 59.00%  | 96-98% |
 | **Human Detection** | 99.00% | 99.00% | **95.00%** | 99-100% |
-| **AI_Vanilla Detection** | 88.33% | **98.33%** | 36.67% ❌ | 98-100% |
-| **AI_Styled Detection** | 75.00% | **80.00%** | 2.50% ❌ | 90-95% |
+| **AI_Vanilla Detection** | 88.33% | **98.33%** | 36.67%  | 98-100% |
+| **AI_Styled Detection** | 75.00% | **80.00%** | 2.50%  | 90-95% |
 | **Training Time** | <1 min | ~10 min | ~20 min | — |
 | **Parameters** | N/A | 46,979 | 740,355 trainable | — |
 
@@ -2431,7 +2420,7 @@ Human             0         5        95    ← 5% error rate (correct)
 **Cause:** Parameters-to-samples ratio too high
 - 740,355 trainable parameters
 - 799 training samples
-- **Ratio: 926 parameters per training sample** ⚠️
+- **Ratio: 926 parameters per training sample** 
 
 **Guideline:** Transformers typically need **10-100 samples per trainable parameter**
 - Required samples: 7.4M - 74M
@@ -2444,9 +2433,9 @@ Human             0         5        95    ← 5% error rate (correct)
 
 | Model | Parameters | Dataset Size | Ratio | Optimal? |
 |-------|------------|--------------|-------|----------|
-| Tier A (Random Forest) | ~10 features | 799 samples | N/A | ✅ Yes |
-| Tier B (Feed-forward NN) | 46,979 | 799 samples | 59 params/sample | ✅ Acceptable |
-| Tier C (DistilBERT + LoRA) | 740,355 | 799 samples | 926 params/sample | ❌ Too high |
+| Tier A (Random Forest) | ~10 features | 799 samples | N/A |  Yes |
+| Tier B (Feed-forward NN) | 46,979 | 799 samples | 59 params/sample |  Acceptable |
+| Tier C (DistilBERT + LoRA) | 740,355 | 799 samples | 926 params/sample |  Too high |
 
 **Why LoRA Wasn't Enough:**
 - LoRA reduced trainable params from 66M → 740k (99% reduction)
@@ -2508,9 +2497,9 @@ This task revealed a **fundamental insight about AI detection**: There is no sin
 
 | Approach | Victorian Dataset | Twain Dataset | Winner (Twain) |
 |----------|------------------|---------------|----------------|
-| **Tier A (Structure)** | **91.00%** ✨ | 83.57% | - |
-| **Tier B (Semantics)** | Not tested | 95.45% 🥈 | - |
-| **Tier C (Transformer)** | 59.00% ❌ | **97.20%** 🏆 | **Tier C** |
+| **Tier A (Structure)** | **91.00%**  | 83.57% | - |
+| **Tier B (Semantics)** | Not tested | 95.45%  | - |
+| **Tier C (Transformer)** | 59.00%  | **97.20%**  | **Tier C** |
 | **Best Approach** | **Tier A** | **Tier C** | **Tier C** |
 
 #### The Author Baseline + Data Size Hypothesis:
@@ -2551,11 +2540,11 @@ Dataset < 800 samples?
 
 | Model | Dataset | Accuracy | Human Detection | AI_Styled Detection | Errors |
 |-------|---------|----------|----------------|---------------------|--------|
-| Tier A | Victorian | **91.00%** | **99.00%** ✨ | 75.00% | 18/200 |
+| Tier A | Victorian | **91.00%** | **99.00%**  | 75.00% | 18/200 |
 | Tier A | Twain | 83.57% | 87.23% | 77.78% | 47/286 |
-| **Tier B** | **Twain** | 95.45% 🥈 | 98.94% | 90.91% | 13/286 |
-| Tier C | Victorian | 59.00% ❌ | 95.00% | 2.50% ❌ | 82/200 |
-| **Tier C** | **Twain** | **97.20%** 🏆 | **100.00%** 🎉 | **93.94%** ✨ | **8/286** 🎯 |
+| **Tier B** | **Twain** | 95.45%  | 98.94% | 90.91% | 13/286 |
+| Tier C | Victorian | 59.00%  | 95.00% | 2.50%  | 82/200 |
+| **Tier C** | **Twain** | **97.20%**  | **100.00%**  | **93.94%**  | **8/286**  |
 
 **Key Metrics:**
 - **Best Overall:** Tier C on Twain (97.20%) - NEW RECORD!
@@ -2584,18 +2573,18 @@ Dataset < 800 samples?
 
 | Approach | Complexity | Performance | Rank |
 |----------|-----------|-------------|------|
-| Tier B (GloVe + NN) | Medium | 95.00% | 🥇 1st |
-| Tier A (Random Forest) | Low | 91.00% | 🥈 2nd |
-| Tier C (DistilBERT) | Very High | 59.00% | 🥉 3rd |
+| Tier B (GloVe + NN) | Medium | 95.00% |  1st |
+| Tier A (Random Forest) | Low | 91.00% |  2nd |
+| Tier C (DistilBERT) | Very High | 59.00% |  3rd |
 
 **Conclusion:** More parameters ≠ Better performance (when data is limited)
 
 #### 2. Overfitting is Insidious
 
 **Warning Signs We Saw:**
-- ✅ Validation accuracy climbing (65% → 85%)
-- ✅ Training loss decreasing (1.08 → 0.41)
-- ❌ Test accuracy stagnating/dropping (59%)
+-  Validation accuracy climbing (65% → 85%)
+-  Training loss decreasing (1.08 → 0.41)
+-  Test accuracy stagnating/dropping (59%)
 
 **Mitigation Attempts (Not Enough):**
 - LoRA (reduced params by 99%)
@@ -2642,7 +2631,7 @@ Dataset < 800 samples?
 
 # Task 3: The Smoking Gun - Explainability Analysis
 
-## 🎯 Objective
+##  Objective
 
 Identify which specific words signal "AI" to our detectors and determine if models detect vocabulary or rhythm.
 
@@ -2653,7 +2642,7 @@ Identify which specific words signal "AI" to our detectors and determine if mode
 
 ---
 
-## 📊 Methodology
+##  Methodology
 
 ### Two-Dataset Comparative Approach
 
@@ -2675,7 +2664,7 @@ Identify which specific words signal "AI" to our detectors and determine if mode
 
 ---
 
-## 🔬 Results: Dataset A (Dickens + Austen)
+##  Results: Dataset A (Dickens + Austen)
 
 ### Tier B Performance: Strong and Consistent
 
@@ -2686,7 +2675,7 @@ Identify which specific words signal "AI" to our detectors and determine if mode
 
 **Sample Prediction:**
 - Paragraph: "Ambition often masks a profound lack of self-acceptance..."
-- Predicted: AI_Vanilla ✅
+- Predicted: AI_Vanilla 
 - Confidence: **99.70%** (AI_Styled: 0.30%, Human: 0.00%)
 
 ### Finding #1: AI-isms Are a MYTH
@@ -2694,7 +2683,7 @@ Identify which specific words signal "AI" to our detectors and determine if mode
 **Expected AI clichés:** "tapestry," "delve," "robust," "comprehensive," "intricate," "nuanced," "testament," "landscape"
 
 **Actually found in top 30 words:**
-- ❌ **ZERO AI clichés detected**
+-  **ZERO AI clichés detected**
 
 **What appeared instead:**
 
@@ -2730,7 +2719,7 @@ Identify which specific words signal "AI" to our detectors and determine if mode
 
 **Expected (should signal Human):** "countenance," "parlour," "ere," "whence," "thither," "forth"
 
-**Found:** ❌ **ZERO Victorian words in top 50**
+**Found:**  **ZERO Victorian words in top 50**
 
 **What signaled Human instead:**
 
@@ -2760,7 +2749,7 @@ Identify which specific words signal "AI" to our detectors and determine if mode
 
 ---
 
-## 🔬 Results: Dataset B (Twain + Austen)
+##  Results: Dataset B (Twain + Austen)
 
 ### Tier C Performance: CATASTROPHIC COLLAPSE
 
@@ -2776,7 +2765,7 @@ Identify which specific words signal "AI" to our detectors and determine if mode
 
 **Sample "correct" prediction:**
 - Paragraph: "Ultimately, social hierarchy is maintained..."
-- Predicted: AI_Vanilla ✅
+- Predicted: AI_Vanilla 
 - Confidence: **33.75%** (AI_Styled: 33.41%, Human: 32.84%)
 - Margin: 0.34% — essentially tied (guessing, not detecting)
 
@@ -2796,7 +2785,7 @@ Identify which specific words signal "AI" to our detectors and determine if mode
 
 **Expected:** "tapestry," "delve," "robust," "testament"
 
-**Found:** ❌ **ZERO in top 50 tokens**
+**Found:**  **ZERO in top 50 tokens**
 
 **What appeared:**
 - Punctuation: `.` (×2), `;`, `,` (×2)
@@ -2812,7 +2801,7 @@ Identify which specific words signal "AI" to our detectors and determine if mode
 > "The new boy took two broad coppers out of his pocket and held them out with derision. Tom struck them to the ground. In an instant both boys were rolling and tumbling in the dirt, gripped together like cats..."
 
 **Model prediction:**
-- Predicted: AI_Styled ❌ (WRONG)
+- Predicted: AI_Styled  (WRONG)
 - Confidence: 33.61%
 - True: Human
 - Class probs: AI_Styled 33.61%, Human 33.56%, AI_Vanilla 32.83%
@@ -2821,27 +2810,27 @@ Identify which specific words signal "AI" to our detectors and determine if mode
 
 | Token | Attribution | Effect |
 |-------|-------------|--------|
-| `battle` | +0.005710 | → AI ❌ |
-| `tom` | +0.005484 | → AI ❌ |
-| `he` | +0.003883 | → AI ❌ |
-| `;` | +0.003828 | → AI ❌ |
-| `his` | +0.003069 | → AI ❌ |
-| `astride` | +0.002847 | → AI ❌ |
-| `like` | +0.002542 | → AI ❌ |
+| `battle` | +0.005710 | → AI  |
+| `tom` | +0.005484 | → AI  |
+| `he` | +0.003883 | → AI  |
+| `;` | +0.003828 | → AI  |
+| `his` | +0.003069 | → AI  |
+| `astride` | +0.002847 | → AI  |
+| `like` | +0.002542 | → AI  |
 
 **Tokens correctly pushing TOWARD Human:**
 
 | Token | Attribution | Effect |
 |-------|-------------|--------|
-| `boy` | -0.006952 | → Human ✅ |
-| `.` | -0.005806 | → Human ✅ |
-| `boys` | -0.002479 | → Human ✅ |
+| `boy` | -0.006952 | → Human  |
+| `.` | -0.005806 | → Human  |
+| `boys` | -0.002479 | → Human  |
 
 **Analysis:**
-- ⚠️ Proper nouns signal AI (`Tom`) — nonsensical
-- ⚠️ Action narrative signals AI (`battle`, `astride`) — contradicts Dataset A pattern!
-- ⚠️ Pronouns signal AI (`he`, `his`) — should be neutral
-- ✅ Child vocabulary signals Human (`boy`, `boys`) — makes sense
+-  Proper nouns signal AI (`Tom`) — nonsensical
+-  Action narrative signals AI (`battle`, `astride`) — contradicts Dataset A pattern!
+-  Pronouns signal AI (`he`, `his`) — should be neutral
+-  Child vocabulary signals Human (`boy`, `boys`) — makes sense
 
 ### Why Did Tier C Fail?
 
@@ -2870,7 +2859,7 @@ Identify which specific words signal "AI" to our detectors and determine if mode
 
 ---
 
-## 📊 Comparative Analysis
+##  Comparative Analysis
 
 ### Side-by-Side Results
 
@@ -2878,17 +2867,17 @@ Identify which specific words signal "AI" to our detectors and determine if mode
 |--------|---------------------|-------------------|
 | **Model** | Tier B (GloVe+NN) | Tier C (DistilBERT+LoRA) |
 | **Test Accuracy** | 95% | ~97% |
-| **Imposter Accuracy** | **100%** | **50%** ⚠️ |
+| **Imposter Accuracy** | **100%** | **50%**  |
 | **Confidence** | 80-99% | 33% (random) |
 | **Max Attribution** | 0.15% | 0.91% |
 | **Mean Attribution** | 0.001 | 0.001 |
-| **AI Clichés** | ❌ ZERO | ❌ ZERO |
-| **Victorian Vocab** | ❌ ZERO | ❌ ZERO |
+| **AI Clichés** |  ZERO |  ZERO |
+| **Victorian Vocab** |  ZERO |  ZERO |
 | **Pattern Learned** | Genre bias (weak) | Nothing (memorization) |
 
 ### Universal Findings (Both Datasets)
 
-#### ✅ AI-isms Don't Exist (or Aren't Detected)
+####  AI-isms Don't Exist (or Aren't Detected)
 **Consistent across both:**
 - ZERO AI clichés in top 50 tokens
 - Models don't detect specific AI buzzwords
@@ -2896,7 +2885,7 @@ Identify which specific words signal "AI" to our detectors and determine if mode
 
 **Conclusion:** Either AI-isms are a myth, or our models can't detect vocabulary-level patterns.
 
-#### ✅ Victorian Vocabulary Is Invisible
+####  Victorian Vocabulary Is Invisible
 **Consistent across both:**
 - ZERO Victorian words detected
 - No era-specific markers
@@ -2904,7 +2893,7 @@ Identify which specific words signal "AI" to our detectors and determine if mode
 
 **Conclusion:** Victorian era is out-of-distribution for modern embeddings.
 
-#### ✅ Microscopic Token Importance
+####  Microscopic Token Importance
 **Consistent across both:**
 - Max: 0.15% (SHAP) to 0.91% (IG)
 - Mean: ~0.001 (0.1%)
@@ -2912,7 +2901,7 @@ Identify which specific words signal "AI" to our detectors and determine if mode
 
 **Conclusion:** Models use distributed semantic patterns, not individual words.
 
-#### ✅ Function Words Matter (Bizarre!)
+####  Function Words Matter (Bizarre!)
 **Consistent across both:**
 - Articles (`the`, `a`) → signal Human
 - Demonstratives (`their`, `our`) → signal AI
@@ -2925,7 +2914,7 @@ Identify which specific words signal "AI" to our detectors and determine if mode
 2. Method artifact: SHAP/IG noise in high-frequency words
 3. Indirect signal: Function words correlate with sentence complexity
 
-#### ✅ Abstract Philosophy Dominates
+####  Abstract Philosophy Dominates
 **Consistent across both:**
 - Top AI words: `value`, `redemption`, `myth`, `profound`, `human`, `individual`
 - Theme: 2020s self-help/psychology discourse
@@ -2934,7 +2923,7 @@ Identify which specific words signal "AI" to our detectors and determine if mode
 
 ### Divergent Findings
 
-#### ⚠️ Performance Collapsed in Dataset B
+####  Performance Collapsed in Dataset B
 
 | Change | Impact |
 |--------|--------|
@@ -2942,12 +2931,12 @@ Identify which specific words signal "AI" to our detectors and determine if mode
 | 47k → 66M params | More capacity to overfit |
 | Result | 100% → 50% accuracy |
 
-#### ⚠️ Contradictory Genre Signals
+####  Contradictory Genre Signals
 
 | Signal | Dataset A | Dataset B | Consistent? |
 |--------|-----------|-----------|-------------|
-| Abstract discourse | → AI ✅ | → AI ✅ | ✅ YES |
-| Narrative action | → Human (expected) | → AI ❌ | ❌ NO |
+| Abstract discourse | → AI  | → AI  |  YES |
+| Narrative action | → Human (expected) | → AI  |  NO |
 
 **Interpretation:**
 - Tier B: Weak genre bias that partially works
@@ -2955,11 +2944,11 @@ Identify which specific words signal "AI" to our detectors and determine if mode
 
 ---
 
-## 🎯 Answering Research Questions
+##  Answering Research Questions
 
 ### 1. Are AI-isms Real?
 
-**Answer:** ❌ **NO EVIDENCE**
+**Answer:**  **NO EVIDENCE**
 
 **Findings:**
 - Zero AI clichés in top 50 tokens (both datasets)
@@ -2973,22 +2962,22 @@ Identify which specific words signal "AI" to our detectors and determine if mode
 **Answer:** **Neither — Detects Semantic Density (Tier B) or Nothing (Tier C)**
 
 **Vocabulary:**
-- ❌ No AI-specific words
-- ❌ No Victorian-era words
-- ⚠️ Function words matter (bizarre)
+-  No AI-specific words
+-  No Victorian-era words
+-  Function words matter (bizarre)
 
 **Rhythm:**
-- ⚠️ Punctuation in top tokens (`.`, `;`)
-- ⚠️ Magnitudes too small (0.3-0.9%)
-- ⚠️ Contradictory signals
+-  Punctuation in top tokens (`.`, `;`)
+-  Magnitudes too small (0.3-0.9%)
+-  Contradictory signals
 
 **What Tier B actually detects:**
-- ✅ Semantic density: Abstract modern discourse style
-- ✅ Era-specific context: Implicit in GloVe embedding space
-- ✅ Genre patterns: Modern abstract vs. Victorian narrative
+-  Semantic density: Abstract modern discourse style
+-  Era-specific context: Implicit in GloVe embedding space
+-  Genre patterns: Modern abstract vs. Victorian narrative
 
 **What Tier C detects:**
-- ❌ Nothing coherent — random guessing
+-  Nothing coherent — random guessing
 
 ### 3. Why Are Humans Mislabeled as AI?
 
@@ -3006,9 +2995,9 @@ Identify which specific words signal "AI" to our detectors and determine if mode
 
 ---
 
-## 🚨 Critical Findings
+##  Critical Findings
 
-### 🚩 Victorian Era Dataset Is Fundamentally Flawed
+###  Victorian Era Dataset Is Fundamentally Flawed
 
 **Evidence:**
 - NO Victorian vocabulary detected (both datasets)
@@ -3022,11 +3011,11 @@ Identify which specific words signal "AI" to our detectors and determine if mode
 3. **Author overfitting:** Models learn "Dickens style = Human," not "human variance = Human"
 
 **What models actually learned:**
-- ✅ "Abstract 2020s philosophy = AI"
-- ✅ "Concrete Victorian narrative = Human"
-- ❌ NOT "Modern vocabulary = AI, Victorian vocabulary = Human"
+-  "Abstract 2020s philosophy = AI"
+-  "Concrete Victorian narrative = Human"
+-  NOT "Modern vocabulary = AI, Victorian vocabulary = Human"
 
-### 🚩 Models Detect Genre, Not Authorship
+###  Models Detect Genre, Not Authorship
 
 **The bias:**
 
@@ -3041,7 +3030,7 @@ Identify which specific words signal "AI" to our detectors and determine if mode
 - Human-written modern philosophy
 - Any out-of-domain examples
 
-### 🚩 Tier C Massive Overfitting
+###  Tier C Massive Overfitting
 
 **Test vs. Imposter performance:**
 - Test: ~97% accuracy (looks great!)
@@ -3056,7 +3045,7 @@ Identify which specific words signal "AI" to our detectors and determine if mode
 - Test set similar to train → high accuracy
 - Imposter set (edge cases, Twain) → collapses
 
-### 🚩 Word-Level Explainability Is Limited
+###  Word-Level Explainability Is Limited
 
 **Problem:** Semantic models use distributed patterns
 
@@ -3074,24 +3063,24 @@ Identify which specific words signal "AI" to our detectors and determine if mode
 
 ---
 
-## ✅ Conclusions
+##  Conclusions
 
 ### What We Proved
 
-1. ✅ **AI-isms are NOT detected** — Zero clichés in top 50 tokens (both datasets)
-2. ✅ **Victorian vocabulary is NOT detected** — Zero era-specific words (both datasets)
-3. ✅ **Models use distributed patterns** — Max 0.15-0.91% per word, mean 0.001
-4. ✅ **Function words matter bizarrely** — Articles signal Human, demonstratives signal AI
-5. ✅ **Genre bias, not AI detection** — Abstract (AI) vs. Narrative (Human)
-6. ✅ **Tier C overfits severely** — 97% test, 50% imposter (memorization)
+1.  **AI-isms are NOT detected** — Zero clichés in top 50 tokens (both datasets)
+2.  **Victorian vocabulary is NOT detected** — Zero era-specific words (both datasets)
+3.  **Models use distributed patterns** — Max 0.15-0.91% per word, mean 0.001
+4.  **Function words matter bizarrely** — Articles signal Human, demonstratives signal AI
+5.  **Genre bias, not AI detection** — Abstract (AI) vs. Narrative (Human)
+6.  **Tier C overfits severely** — 97% test, 50% imposter (memorization)
 
 ### What We Didn't Prove
 
-1. ❌ AI-isms exist as detectable patterns
-2. ❌ Victorian era is useful temporal contrast
-3. ❌ Models detect vocabulary or rhythm
-4. ❌ Word-level explainability is adequate
-5. ❌ Tier C generalizes beyond training data
+1.  AI-isms exist as detectable patterns
+2.  Victorian era is useful temporal contrast
+3.  Models detect vocabulary or rhythm
+4.  Word-level explainability is adequate
+5.  Tier C generalizes beyond training data
 
 ### The Brutal Truth
 
@@ -3105,7 +3094,7 @@ Identify which specific words signal "AI" to our detectors and determine if mode
 
 ## 📋 Recommendations
 
-### ❌ Abandon Victorian Era Dataset
+###  Abandon Victorian Era Dataset
 
 **Why:**
 - Out-of-distribution for GloVe (2014) and DistilBERT (2018)
@@ -3113,7 +3102,7 @@ Identify which specific words signal "AI" to our detectors and determine if mode
 - Author-specific overfitting (Dickens ≠ Twain)
 - No Victorian vocabulary detected
 
-### ✅ Use Modern Human Authors (2000-2020)
+###  Use Modern Human Authors (2000-2020)
 
 #### Option A: Contemporary Non-Fiction
 **Authors:** Malcolm Gladwell, Steven Pinker, Yuval Noah Harari, Michael Lewis, Daniel Kahneman
@@ -3141,7 +3130,7 @@ Identify which specific words signal "AI" to our detectors and determine if mode
 
 **Advantage:** Diagnoses dataset bias explicitly
 
-### ✅ Methodological Improvements
+###  Methodological Improvements
 
 #### Generate AI in Same Style as Human
 **Don't:** "Write Victorian-themed philosophy"
@@ -3164,7 +3153,7 @@ Identify which specific words signal "AI" to our detectors and determine if mode
 
 **Goal:** Ensure generalization across human authors
 
-### ✅ Explainability Method Improvements
+###  Explainability Method Improvements
 
 #### Use Complementary Methods
 **Token-level:** Integrated Gradients, LIME, Attention visualization
@@ -3182,23 +3171,23 @@ Identify which specific words signal "AI" to our detectors and determine if mode
 
 **Example:** "AI uses 2.3× more abstract nouns per sentence"
 
-### ✅ Honest Reporting
+###  Honest Reporting
 
 **Don't say:**
-- ❌ "We achieved 97% accuracy in AI detection"
-- ❌ "AI uses words like 'tapestry' and 'delve'"
-- ❌ "Our model detects AI authorship patterns"
+-  "We achieved 97% accuracy in AI detection"
+-  "AI uses words like 'tapestry' and 'delve'"
+-  "Our model detects AI authorship patterns"
 
 **Do say:**
-- ✅ "We achieved 97% on Victorian-vs-AI genre classification"
-- ✅ "Model detects abstract discourse style, not specific vocabulary"
-- ✅ "No lexical 'smoking guns'; models use distributed semantic patterns"
-- ✅ "Model failed on Twain, suggesting author-specific overfitting"
-- ✅ "Victorian dataset introduced genre confound; modern authors recommended"
+-  "We achieved 97% on Victorian-vs-AI genre classification"
+-  "Model detects abstract discourse style, not specific vocabulary"
+-  "No lexical 'smoking guns'; models use distributed semantic patterns"
+-  "Model failed on Twain, suggesting author-specific overfitting"
+-  "Victorian dataset introduced genre confound; modern authors recommended"
 
 ---
 
-## 📊 Final Summary
+##  Final Summary
 
 ### The Big Picture
 
@@ -3207,12 +3196,12 @@ Identify which specific words signal "AI" to our detectors and determine if mode
 **Result:** **There is no smoking gun because models don't use lexical features.**
 
 **Key discoveries:**
-1. ❌ AI-isms don't exist (or aren't detected)
-2. ❌ Victorian vocabulary invisible to modern embeddings
-3. ❌ Tier C overfits severely (97% test → 50% imposter)
-4. ✅ Models detect semantic density, not vocabulary
-5. ✅ Genre bias dominates (abstract vs. narrative)
-6. ✅ Word-level explainability limited (0.001 avg attribution)
+1.  AI-isms don't exist (or aren't detected)
+2.  Victorian vocabulary invisible to modern embeddings
+3.  Tier C overfits severely (97% test → 50% imposter)
+4.  Models detect semantic density, not vocabulary
+5.  Genre bias dominates (abstract vs. narrative)
+6.  Word-level explainability limited (0.001 avg attribution)
 
 ### Scientific Honesty Statement
 
@@ -3327,11 +3316,11 @@ Using a Genetic Algorithm (GA), evolve AI-generated paragraphs to fool the Tier 
 ### Implications
 
 **For Detector Robustness:**
-- ✅ Not easily fooled by vocabulary changes alone (40% ceiling)
-- ✅ Structural features (sentence variance) hard to fake naturally
-- ✅ Multi-strategy attacks show promise but hit ceiling (60% max)
-- ✅ Over-optimization is detectable (chaos paradox confirmed)
-- ✅ **Detector is production-ready:** 40-point exploitability gap still keeps 97% baseline accuracy effective
+-  Not easily fooled by vocabulary changes alone (40% ceiling)
+-  Structural features (sentence variance) hard to fake naturally
+-  Multi-strategy attacks show promise but hit ceiling (60% max)
+-  Over-optimization is detectable (chaos paradox confirmed)
+-  **Detector is production-ready:** 40-point exploitability gap still keeps 97% baseline accuracy effective
 
 **For Future Adversarial Attacks:**
 - Must target ALL top features simultaneously (variance + punctuation + grammar + POS + TTR + hapax)
@@ -3357,7 +3346,7 @@ Using a Genetic Algorithm (GA), evolve AI-generated paragraphs to fool the Tier 
 
 **Result:**
 - **Predicted class:** AI_Vanilla (52.13% confidence)
-- **Human score:** 14.95% ❌
+- **Human score:** 14.95% 
 - **Verdict:** Detector misclassified genuine human writing as AI
 
 **Why it failed:**
@@ -3372,7 +3361,7 @@ Using a Genetic Algorithm (GA), evolve AI-generated paragraphs to fool the Tier 
 
 **Result:**
 - **Predicted class:** AI_Vanilla (50.32% confidence)
-- **Human score:** 14.19% ❌ (DECREASED!)
+- **Human score:** 14.19%  (DECREASED!)
 - **Verdict:** Performance worsened—Victorian words in wrong context triggered AI detection
 
 **Why it failed:**
@@ -3395,7 +3384,7 @@ strove!—to master them..."
 ```
 
 **Result:**
-- **Predicted class:** Human (58.52% confidence) ✅
+- **Predicted class:** Human (58.52% confidence) 
 - **Human score:** 58.52% (+43.57 points improvement!)
 - **Verdict:** Successfully "humanized" by matching training distribution
 
@@ -3418,10 +3407,10 @@ strove!—to master them..."
 3. +43.57 point swing based purely on genre transformation
 
 **What the detector ACTUALLY learned:**
-- ✅ "Victorian narrative fiction with emotional markers = Human"
-- ❌ NOT "Human writing patterns = Human"
-- ✅ "Modern analytical prose with uniform structure = AI"
-- ❌ NOT "AI writing patterns = AI"
+-  "Victorian narrative fiction with emotional markers = Human"
+-  NOT "Human writing patterns = Human"
+-  "Modern analytical prose with uniform structure = AI"
+-  NOT "AI writing patterns = AI"
 
 **Root cause:** Training dataset choice created **temporal and genre bias**:
 - Human data: 1810-1850s narrative fiction (Dickens, Austen)
@@ -3431,11 +3420,11 @@ strove!—to master them..."
 **Implications:**
 
 **For Real-World Deployment:**
-- ❌ Detector CANNOT recognize modern human academic writing
-- ❌ Detector CANNOT be used for contemporary text detection
-- ❌ Any Victorian-style narrative scores as Human (regardless of actual author)
-- ❌ Any modern analytical prose scores as AI (regardless of actual author)
-- ⚠️ This explains 97% accuracy on test set: detecting era/genre, not authorship
+-  Detector CANNOT recognize modern human academic writing
+-  Detector CANNOT be used for contemporary text detection
+-  Any Victorian-style narrative scores as Human (regardless of actual author)
+-  Any modern analytical prose scores as AI (regardless of actual author)
+-  This explains 97% accuracy on test set: detecting era/genre, not authorship
 
 **For Adversarial Testing Results:**
 - Explains 60% ceiling: transforming analytical → narrative destroys content coherence
