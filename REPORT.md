@@ -7,7 +7,7 @@
 
 ---
 
-## 📋 Executive Summary
+##  Executive Summary
 
 This project tackles the challenge of detecting AI-generated text through linguistic analysis. Unlike typical AI detection that relies on topic or content differences, this approach proves that **structural and stylistic features alone** can distinguish human from AI writing.
 
@@ -3092,7 +3092,7 @@ Identify which specific words signal "AI" to our detectors and determine if mode
 
 ---
 
-## 📋 Recommendations
+##  Recommendations
 
 ###  Abandon Victorian Era Dataset
 
