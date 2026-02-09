@@ -256,22 +256,11 @@ Tested detector on author's own modern writing (Statement of Purpose):
 
 ---
 
-## ⏱️ Time Investment & Reproducibility
-
-| Task | Time | Notebooks | Status |
-|------|------|-----------|--------|
-| Task 0 (Dataset Creation) | ~11 hours | 1 notebook (43KB) |  Complete |
-| Task 1 (Fingerprinting) | ~8 hours | 1 notebook (18KB) + 7 analysis docs |  Complete |
-| Task 2 (Classification) | ~15 hours | 3 notebooks (Tier A/B/C) |  Complete |
-| Task 3 (Explainability) | ~6 hours | 1 notebook (SHAP) |  Complete |
-| Task 4 (Adversarial) | ~12 hours | 1 notebook (GA) |  Complete |
-| Documentation | ~8 hours | REPORT.md (2700 lines) |  Complete |
-| **Total** | **~60 hours** | **7 Jupyter notebooks** | **All tasks ** |
-
 **Reproducibility:**
 -  All notebooks contain logged outputs and results
 -  All experiments documented in REPORT.md with methodology
--  All datasets saved in `data/dataset/`
+-  Old dataset(Dickens+Austen) saved in `data/dataset/`
+-  New dataset(Twain+Austen) saved in `TASK0/data/dataset/`
 -  Trained models saved in `TASK2/task2_tier_c_distilbert_lora/`
 -  requirements.txt includes all dependencies with versions
 
@@ -386,6 +375,15 @@ Tested detector on author's own modern writing (Statement of Purpose):
 ---
 
 **GitHub Repository:** yoimdepressed
+
+## Trained Models & Embeddings
+
+Due to size constraints, pretrained embeddings (GloVe) and trained model weights
+(checkpoints, LoRA adapters) are excluded from this repository.
+
+All experiments are fully logged in the notebooks with outputs.
+Models can be reproduced using the provided notebooks, or shared upon request.
+
 
 **Key Documents:**
 - **README.md** (this file) - Project overview & quick start
